@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "321614146079",
+    "project_id": "instagramlagame",
+    "storage_bucket": "instagramlagame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321614146079:android:f8d015cfadfaa8d652c32a",
+        "android_client_info": {
+          "package_name": "com.softsquared.instagramlagame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321614146079-du7q8a9q4hme3ucurk3abp7p4bh6h0ba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.softsquared.instagramlagame",
+            "certificate_hash": "fbcdc4399ddfe495f638af26693579bd1f271e20"
+          }
+        },
+        {
+          "client_id": "321614146079-vrrd93r7t4167hesig60dcn02tv8t292.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0I7dPUjtXR-nNS1dUQhhJqHnrSah1n3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321614146079-vrrd93r7t4167hesig60dcn02tv8t292.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
