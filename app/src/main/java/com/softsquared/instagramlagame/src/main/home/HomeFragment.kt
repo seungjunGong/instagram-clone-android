@@ -5,9 +5,9 @@ import android.view.View
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentHomeBinding
-import com.softsquared.instagramlagame.src.main.home.ui.FeedData
-import com.softsquared.instagramlagame.src.main.home.ui.FeedRVD
-import com.softsquared.instagramlagame.src.main.home.ui.StoryData
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.FeedData
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.FeedRVD
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.StoryData
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home){
 

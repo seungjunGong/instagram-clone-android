@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <EditText
+        android:id="@+id/signUp_phone_et"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:inputType="textPostalAddress"
+        android:hint="휴대폰"
+        android:background="@drawable/et_login_border"
+        android:textColorHint="@color/login_color_et"
+        android:nextFocusDown="@id/login_user_password_et"
+        android:paddingStart="14dp"
+        android:textSize="@dimen/login_large_size_tv"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@color/black"
+        android:layout_marginTop="@dimen/login_basic_margin_top"
+        android:layout_marginEnd="@dimen/login_side_margin"
+        android:layout_marginStart="@dimen/login_side_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

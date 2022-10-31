@@ -15,7 +15,7 @@
         android:background="@android:color/transparent"
         app:civ_border_overlay="true"
         app:civ_border_width="1dp"
-        app:civ_border_color="@color/basic_gray"
+        app:civ_border_color="@color/basic_profile_border_line"
         android:src="@drawable/ic_basic_profile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -47,24 +47,42 @@
         android:id="@+id/feed_vp"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_marginTop="@dimen/basic_margin_top"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/feed_profile_iv"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feed_profile_iv" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/feed_page_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/basic_margin_side"
+        app:chipSurfaceColor="@color/translucent_black"
+        android:text="1/9"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textSize="@dimen/feed_text_size"
+        app:chipMinTouchTargetSize="0dp"
+        app:layout_constraintTop_toTopOf="@id/feed_vp"
+        app:layout_constraintEnd_toEndOf="@id/feed_vp"/>
+
 
     <com.hrskrs.instadotlib.InstaDotView
         android:id="@+id/feed_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:dot_activeColor="#0F9EF1"
-        app:dot_activeSize="10dp"
-        app:dot_inactiveColor="@color/basic_gray"
-        app:dot_inactiveSize="8dp"
-        app:dot_margin="10dp"
-        app:dot_mediumSize="6dp"
-        app:dot_smallSize="4dp"
+        android:layout_marginTop="5dp"
+        app:dot_activeColor="@color/basic_sky_blue"
+        app:dot_activeSize="6dp"
+        app:dot_inactiveColor="@color/bright_gray"
+        app:dot_inactiveSize="5dp"
+        app:dot_margin="3dp"
+        app:dot_mediumSize="4dp"
+        app:dot_smallSize="3dp"
         app:layout_constraintTop_toTopOf="@id/feed_like_bt"
-        app:layout_constraintBottom_toBottomOf="@id/feed_like_bt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

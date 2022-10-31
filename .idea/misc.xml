@@ -7,23 +7,29 @@
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable-v24/ic_bttnav_reels.xml" value="0.205" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable-v24/ic_bttnav_search.xml" value="0.1" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable-v24/ic_bttnav_shopping.xml" value="0.205" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable/bt_login_border.xml" value="0.1925" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable/et_login_border.xml" value="0.1925" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable/ic_add.xml" value="0.2225" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable/ic_bttnav_home.xml" value="0.205" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable/ic_password_toggle.xml" value="0.1925" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/drawable/main_bttnav_selector_color.xml" value="0.205" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/activity_splash.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/feed_empty.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/feed_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/feed_vp_item.xml" value="0.365625" />
-        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_home_story.xml" value="0.365625" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_profile.xml" value="0.365625" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_reels.xml" value="0.365625" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_search.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_shopping.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_signup.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/home_story.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/home_story_header.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/home_story_item.xml" value="0.365625" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/signup_tab_phone.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/menu/bttnav_menu.xml" value="0.36666666666666664" />
       </map>
     </option>

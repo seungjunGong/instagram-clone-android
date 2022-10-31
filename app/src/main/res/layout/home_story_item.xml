@@ -13,7 +13,7 @@
         android:background="@android:color/transparent"
         app:civ_border_overlay="true"
         app:civ_border_width="1dp"
-        app:civ_border_color="@color/basic_gray"
+        app:civ_border_color="@color/basic_profile_border_line"
         android:src="@drawable/ic_basic_profile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>

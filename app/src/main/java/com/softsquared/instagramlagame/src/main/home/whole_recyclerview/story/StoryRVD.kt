@@ -1,11 +1,9 @@
-package com.softsquared.instagramlagame.src.main.home.ui
+package com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.softsquared.instagramlagame.databinding.*
-import com.softsquared.instagramlagame.src.main.home.ui.StoryData
 
 class StoryRVD (private val storyData: ArrayList<StoryData>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

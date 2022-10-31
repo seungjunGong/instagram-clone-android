@@ -7,4 +7,9 @@
     <dimen name="feed_text_start_marin">5dp</dimen>
     <dimen name="feed_text_size">14sp</dimen>
     <dimen name="feed_comment_top_margin">2dp</dimen>
+    <dimen name="login_side_margin">20dp</dimen>
+    <dimen name="login_basic_margin_top">15dp</dimen>
+    <dimen name="login_large_size_tv">16sp</dimen>
+    <dimen name="login_small_tv">12sp</dimen>
+    <dimen name="login_emphasis_tv">13sp</dimen>
 </resources>

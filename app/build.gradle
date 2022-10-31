@@ -73,5 +73,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
 
+    // InstaDot
     implementation 'com.github.hrskrs:InstaDotView:1.1'
+
+    // ViewPager2
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    // Coroutine AutoDispose
+    implementation 'com.github.satoshun.coroutine.autodispose:autodispose:0.3.1'
+
 }
