@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/phone_email_nav_graph"
+    app:startDestination="@id/phoneTab">
+    <fragment
+        android:id="@+id/emailTab"
+        android:name="com.softsquared.instagramlagame.src.signup.phone_email.EmailTab"
+        android:label="tab_email"
+        tools:layout="@layout/tab_email" >
+        <action
+            android:id="@+id/navToPhoneTab"
+            app:destination="@id/phoneTab"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/phoneTab"
+        android:name="com.softsquared.instagramlagame.src.signup.phone_email.PhoneTab"
+        android:label="tab_phone"
+        tools:layout="@layout/tab_phone" >
+
+        <action
+            android:id="@+id/navToEmailTab"
+            app:destination="@id/emailTab"/>
+    </fragment>
+</navigation>

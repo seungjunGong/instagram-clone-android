@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/phoneTab"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/login_side_margin"
+    android:layout_marginStart="@dimen/login_side_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".src.signup.phone_email.PhoneTab">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/signUp_phone_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="phone"
+            android:hint="휴대폰"
+            android:background="@drawable/et_login_border"
+            android:textColorHint="@color/login_color_et"
+            android:paddingStart="100dp"
+            android:textSize="@dimen/login_large_size_tv"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@color/black"
+            android:imeOptions="actionDone"
+            android:layout_marginTop="@dimen/login_basic_margin_top"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/signUp_phone_et_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_close_gray"
+            app:layout_constraintTop_toTopOf="@id/signUp_phone_et"
+            app:layout_constraintBottom_toBottomOf="@id/signUp_phone_et"
+            app:layout_constraintEnd_toEndOf="@id/signUp_phone_et"/>
+        <TextView
+            android:id="@+id/signUp_phone_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KR +82"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/basic_margin_side"
+            android:textSize="15sp"
+            android:textColor="@color/basic_gray"
+            app:layout_constraintBottom_toBottomOf="@id/signUp_phone_et"
+            app:layout_constraintTop_toTopOf="@id/signUp_phone_et"
+            app:layout_constraintStart_toStartOf="@id/signUp_phone_et"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:layout_height="28dp"
+            android:layout_marginStart="@dimen/basic_margin_side"
+            android:layout_gravity="center_vertical"
+            android:background="@color/login_border_color"
+            app:layout_constraintTop_toTopOf="@id/signUp_phone_et"
+            app:layout_constraintBottom_toBottomOf="@id/signUp_phone_et"
+            app:layout_constraintStart_toEndOf="@id/signUp_phone_country"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/phone_wrong_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/basic_margin_top"
+        android:text="유효하지 않은 매개변수"
+        android:textColor="@color/red_emphasis"
+        android:textSize="@dimen/login_small_tv" />
+
+    <TextView
+        android:id="@+id/signUp_infor_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/login_basic_margin_top"
+        android:text="보안 및 로그인 목적으로 Instagram에서 보내는 SMS 알림을\n수신할 수 있습니다."
+        android:textSize="@dimen/login_emphasis_tv" />
+
+    <TextView
+        android:id="@+id/signUp_phone_next"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:clickable="false"
+        android:text="다음"
+        android:textColor="@color/bright_sky_blue_tv_color"
+        android:textSize="@dimen/login_large_size_tv"
+        android:layout_marginTop="@dimen/login_basic_margin_top"
+        android:background="@drawable/bt_login_border" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

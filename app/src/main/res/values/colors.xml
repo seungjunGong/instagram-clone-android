@@ -17,4 +17,5 @@
     <color name="login_border_color">#C8C6C4</color>
     <color name="basic_dark_blue">#01356A</color>
     <color name="bright_sky_blue_tv_color">#E7F0FD</color>
+    <color name="red_emphasis">#E3242B</color>
 </resources>

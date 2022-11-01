@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/phoneEmailFragment"
+    tools:context=".src.signup.phone_email.PhoneEmailFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/sginUp_login_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_login_signup" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/phone_email_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorHeight="0.8dp"
+            android:layout_marginStart="@dimen/login_side_margin"
+            android:layout_marginTop="@dimen/basic_margin_top"
+            android:layout_marginEnd="@dimen/login_side_margin"
+            app:tabIndicatorColor="@color/black"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextAppearance="@style/tabTextSize"
+            app:tabTextColor="@color/basic_gray">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전화번호" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이메일" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <View
+            android:id="@+id/phone_email_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="@dimen/login_side_margin"
+            android:layout_marginEnd="@dimen/login_side_margin"
+            android:background="@color/basic_gray" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/phone_email_tab_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:navGraph="@navigation/phone_email_nav_graph"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <LinearLayout
+        android:id="@+id/signUp_login_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/login_basic_margin_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이미 계정이 있으신가요?"
+            android:layout_gravity="center"
+            android:textSize="@dimen/login_small_tv"
+            android:textColor="@color/basic_gray"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="로그인하기"
+            android:textSize="@dimen/login_emphasis_tv"
+            android:textColor="@color/basic_dark_blue"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/login_question_tv"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/sginUp_login_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/login_basic_margin_top"
+        android:background="@color/login_border_color"
+        app:layout_constraintBottom_toTopOf="@id/signUp_login_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

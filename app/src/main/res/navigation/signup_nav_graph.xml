@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_nav_graph"
+    app:startDestination="@id/phoneEmailFragment">
+
+
+    <fragment
+        android:id="@+id/phoneEmailFragment"
+        android:name="com.softsquared.instagramlagame.src.signup.phone_email.PhoneEmailFragment"
+        android:label="fragment_phone_email"
+        tools:layout="@layout/fragment_phone_email">
+        <action
+            android:id="@+id/navToPhoneTab"
+            app:destination="@id/phoneTab"/>
+        <action
+            android:id="@+id/navToEmailTab"
+            app:destination="@id/emailTab"/>
+        <action
+            android:id="@+id/navToIdPasswordFragment"
+            app:destination="@id/idPasswordFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/idPasswordFragment"
+        android:name="com.softsquared.instagramlagame.src.signup.id_password.IdPasswordFragment"
+        android:label="fragment_id_password"
+        tools:layout="@layout/fragment_id_password" >
+        <action
+            android:id="@+id/navToBirthDayFragment"
+            app:destination="@id/birthDayFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/birthDayFragment"
+        android:name="com.softsquared.instagramlagame.src.signup.birthday.BirthDayFragment"
+        android:label="fragment_birthday"
+        tools:layout="@layout/fragment_birthday" >
+        <action
+            android:id="@+id/navToAgreementFragment"
+            app:destination="@id/agreementFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/agreementFragment"
+        android:name="com.softsquared.instagramlagame.src.signup.agreement.AgreementFragment"
+        android:label="fragment_agreement"
+        tools:layout="@layout/fragment_agreement" >
+        <action
+            android:id="@+id/navToUserNameFragment"
+            app:destination="@id/userNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userNameFragment"
+        android:name="com.softsquared.instagramlagame.src.signup.user_name.UserNameFragment"
+        android:label="fragment_user_name"
+        tools:layout="@layout/fragment_user_name" />
+
+
+</navigation>

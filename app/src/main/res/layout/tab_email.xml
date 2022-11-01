@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/emailTab"
+    android:orientation="vertical"
+    android:layout_marginEnd="@dimen/login_side_margin"
+    android:layout_marginStart="@dimen/login_side_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".src.signup.phone_email.EmailTab">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signUp_email_et"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textEmailAddress"
+            android:hint="이메일"
+            android:background="@drawable/et_login_border"
+            android:textColorHint="@color/login_color_et"
+            android:imeOptions="actionDone"
+            android:paddingStart="14dp"
+            android:textSize="@dimen/login_large_size_tv"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@color/black"
+            android:layout_marginTop="@dimen/login_basic_margin_top"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/signUp_email_et_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_close_gray"
+            app:layout_constraintTop_toTopOf="@id/signUp_email_et"
+            app:layout_constraintBottom_toBottomOf="@id/signUp_email_et"
+            app:layout_constraintEnd_toEndOf="@id/signUp_email_et"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/email_wrong_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/basic_margin_top"
+        android:visibility="gone"
+        android:text="올바른 이메일 주소를 입력하세요."
+        android:textColor="@color/red_emphasis"
+        android:textSize="@dimen/login_small_tv"
+        android:textStyle="bold" />
+
+
+
+    <TextView
+        android:id="@+id/signUp_email_next"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="다음"
+        android:clickable="false"
+        android:textColor="@color/bright_sky_blue_tv_color"
+        android:textSize="@dimen/login_large_size_tv"
+        android:layout_marginTop="@dimen/login_basic_margin_top"
+        android:background="@drawable/bt_login_border"
+        app:layout_constraintTop_toBottomOf="@id/signUp_email_et"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

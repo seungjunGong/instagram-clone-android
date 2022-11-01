@@ -12,4 +12,5 @@
     <dimen name="login_large_size_tv">16sp</dimen>
     <dimen name="login_small_tv">12sp</dimen>
     <dimen name="login_emphasis_tv">13sp</dimen>
+    <dimen name="agreement_top_margin">30dp</dimen>
 </resources>
