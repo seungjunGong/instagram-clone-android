@@ -1,12 +1,15 @@
 package com.softsquared.instagramlagame.src.signup.agreement
 
 import android.os.Bundle
+
 import android.view.View
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentAgreementBinding
-import com.softsquared.instagramlagame.src.signup.birthday.BirthDayFragmentDirections
+import com.softsquared.instagramlagame.src.signup.sginup_models.PostSignUpRequest
+
 
 class AgreementFragment : BaseFragment<FragmentAgreementBinding>(FragmentAgreementBinding::bind, R.layout.fragment_agreement) {
 
@@ -15,11 +18,17 @@ class AgreementFragment : BaseFragment<FragmentAgreementBinding>(FragmentAgreeme
     private var dataCheck = false
     private var locationCheck = false
 
+    private val args: AgreementFragmentArgs by navArgs()
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         binding.signUpAgreementNext.setOnClickListener {
-            val action = AgreementFragmentDirections.navToUserNameFragment()
+
+            val data = PostSignUpRequest(phoneEmail = args.getBirthDay!!.phoneEmail, birth = args.getBirthDay!!.birth, id = args.getBirthDay!!.id, password = args.getBirthDay!!.password)
+            val action = AgreementFragmentDirections.navToUserNameFragment(data)
             Navigation.findNavController(requireActivity(), R.id.signUp_container).navigate(action)
         }
 

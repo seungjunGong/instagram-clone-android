@@ -8,13 +8,25 @@
     tools:context=".src.main.profile.ProfileFragment">
 
     <TextView
+        android:id="@+id/profile_nickName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="프로필프레그먼트"
+        android:text="alph281ow9"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="@dimen/basic_margin_side"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_arrow_down"
+        app:layout_constraintTop_toTopOf="@id/profile_nickName"
+        app:layout_constraintBottom_toBottomOf="@id/profile_nickName"
+        app:layout_constraintStart_toEndOf="@id/profile_nickName"
+        android:layout_marginStart="1dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

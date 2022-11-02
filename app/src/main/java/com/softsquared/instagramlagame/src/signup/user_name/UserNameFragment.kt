@@ -7,35 +7,58 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentUserNameBinding
+import com.softsquared.instagramlagame.src.signup.agreement.AgreementFragmentArgs
 import com.softsquared.instagramlagame.src.signup.phone_email.PhoneEmailFragmentDirections
+import com.softsquared.instagramlagame.src.signup.phone_email.models.PhoneEmailService
+import com.softsquared.instagramlagame.src.signup.sginup_models.PostSignUpRequest
+import com.softsquared.instagramlagame.src.signup.sginup_models.SignUpViewModel
+import com.softsquared.instagramlagame.src.signup.user_name.models.UserNameFragmentInterface
+import com.softsquared.instagramlagame.src.signup.user_name.models.UserNameResponse
+import com.softsquared.instagramlagame.src.signup.user_name.models.UserNameService
 import java.util.regex.Pattern
 
-class UserNameFragment : BaseFragment<FragmentUserNameBinding>(FragmentUserNameBinding::bind, R.layout.fragment_user_name) {
+class UserNameFragment : BaseFragment<FragmentUserNameBinding>(FragmentUserNameBinding::bind, R.layout.fragment_user_name),
+        UserNameFragmentInterface{
 
     private var nextClick = false
+
+    lateinit var checkSignUpViewModel: SignUpViewModel
+
+    private val args: UserNameFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //viewModelProvider에 오너를 requireActivity()로 해주어야합니다.
+        checkSignUpViewModel = ViewModelProvider(requireActivity())[SignUpViewModel::class.java]
+
         // 완료버튼 클릭
         binding.signUpUserNameEt.setOnEditorActionListener(getEditerActionListener(binding.signUpUserNameNext))
 
+
+        binding.signUpUserNameNext.isClickable = false
         // 다음
         binding.signUpUserNameNext.setOnClickListener {
+            val name = binding.signUpUserNameEt.text
             // 유저 네임 정규식
-            if (!Pattern.matches("^[a-zA-Z0-9._-]{6,18}\$" ,binding.signUpUserNameEt.text)) {
+            if ((Pattern.matches("^[a-zA-Z0-9._-]{6,18}\$" ,name)) && (("." in name)||("_" in name)||("-" in name))) {
+                //유저 네임 맞음!
+                val certificationUserName = binding.signUpUserNameEt.text.toString()
+
+                // 유저 네임 확인 요청
+                UserNameService(this).tryGetUserName(certificationUserName)
+
+
+            } else {
                 //유저 네임 아님!
                 binding.userNameWrongTv.visibility = View.VISIBLE
                 binding.signUpUserNameEt.background = resources.getDrawable(com.softsquared.instagramlagame.R.drawable.bt_login_border_wrong)
-            } else {
-                //유저 네임 맞음!
-                val certificationUserName = binding.signUpUserNameEt.text.toString()
-                showCustomToast("$certificationUserName")
-                showLoadingDialog(requireContext())
             }
         }
         binding.signUpUserNameEt.addTextChangedListener(object : TextWatcher {
@@ -77,10 +100,14 @@ class UserNameFragment : BaseFragment<FragmentUserNameBinding>(FragmentUserNameB
             binding.userNameWrongTv.visibility = View.GONE
             binding.signUpUserNameEt.background = resources.getDrawable(com.softsquared.instagramlagame.R.drawable.et_login_border)
         }
-        if (Pattern.matches("^[a-zA-Z0-9._-]{6,18}\$" ,binding.signUpUserNameEt.text)) {
+        val name = binding.signUpUserNameEt.text.toString()
+        if ((Pattern.matches("^[a-zA-Z0-9._-]{6,18}\$" ,name)) && (("." in name)||("_" in name)||("-" in name))) {
             binding.signUpUserNameCorrect.visibility = View.VISIBLE
         } else{
             binding.signUpUserNameCorrect.visibility = View.GONE
+        }
+        if ( binding.userNameRequestWrongTv.visibility == View.VISIBLE ){
+            binding.userNameRequestWrongTv.visibility == View.GONE
         }
     }
 
@@ -92,5 +119,24 @@ class UserNameFragment : BaseFragment<FragmentUserNameBinding>(FragmentUserNameB
             }
             false
         }
+    }
+
+    // 요청 성공
+    override fun onGetUserNameSuccess(response: UserNameResponse, userName: String) {
+
+
+        if(response.result == "사용가능한 닉네임입니다."){
+            val data = PostSignUpRequest(phoneEmail = args.getNext!!.phoneEmail, birth = args.getNext!!.birth, id = args.getNext!!.id, password = args.getNext!!.password, user_name = userName)
+
+            // 데이터 전달
+            checkSignUpViewModel.setCheckSignUp(data)
+        } else {
+            dismissLoadingDialog()
+            binding.userNameRequestWrongTv.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onGetUserNameFailure(message: String) {
+        showCustomToast("오류 : $message")
     }
 }

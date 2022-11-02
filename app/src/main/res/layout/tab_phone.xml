@@ -89,16 +89,41 @@
         android:text="보안 및 로그인 목적으로 Instagram에서 보내는 SMS 알림을\n수신할 수 있습니다."
         android:textSize="@dimen/login_emphasis_tv" />
 
-    <TextView
-        android:id="@+id/signUp_phone_next"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:clickable="false"
-        android:text="다음"
-        android:textColor="@color/bright_sky_blue_tv_color"
-        android:textSize="@dimen/login_large_size_tv"
-        android:layout_marginTop="@dimen/login_basic_margin_top"
-        android:background="@drawable/bt_login_border" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_basic_margin_top">
+
+        <TextView
+            android:id="@+id/signUp_phone_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:clickable="false"
+            android:text="다음"
+            android:textColor="@color/bright_sky_blue_tv_color"
+            android:textSize="@dimen/login_large_size_tv"
+            android:background="@drawable/bt_login_border"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ProgressBar
+            android:id="@+id/signUp_Phone_progressBar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:indeterminateDrawable="@anim/loading_sgin_up_lotate"
+            android:progressBackgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

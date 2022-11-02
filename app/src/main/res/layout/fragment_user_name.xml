@@ -104,7 +104,20 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
+    <TextView
+        android:id="@+id/user_name_request_wrong_tv"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="사용할 수 없는 사용자 이름입니다. 다른 이름을 사용하세요."
+        android:textColor="@color/white"
+        android:textSize= "15sp"
+        android:textStyle="bold"
+        android:background="@color/red_emphasis"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 

@@ -2,23 +2,38 @@ package com.softsquared.instagramlagame.src.signup.id_password
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentIdPasswordBinding
+import com.softsquared.instagramlagame.src.signup.phone_email.PhoneEmailFragmentDirections
+import com.softsquared.instagramlagame.src.signup.sginup_models.PostSignUpRequest
+import com.softsquared.instagramlagame.src.signup.sginup_models.SignUpViewModel
 
 class IdPasswordFragment : BaseFragment<FragmentIdPasswordBinding>(FragmentIdPasswordBinding::bind, R.layout.fragment_id_password) {
 
     private var nextClick = false
 
+    lateinit var checkSignUpViewModel: SignUpViewModel
+
+    private val args: IdPasswordFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 현재 동기화하지 않고 계속하기만 작동함
+        binding.numberInactiveNext.isClickable = false
+
+        //viewModelProvider에 오너를 requireActivity()로 해주어야합니다.
+        checkSignUpViewModel = ViewModelProvider(requireActivity())[SignUpViewModel::class.java]
 
         // 텍스트 삭제
         binding.signUpIdEtClose.setOnClickListener {
@@ -37,9 +52,13 @@ class IdPasswordFragment : BaseFragment<FragmentIdPasswordBinding>(FragmentIdPas
                 binding.passwordWrongTv.visibility = View.VISIBLE
                 binding.signUpPasswordEt.background = resources.getDrawable(com.softsquared.instagramlagame.R.drawable.bt_login_border_wrong)
             } else {
+                val certificationId = binding.signUpIdEt.text.toString()
                 val certificationPassword = binding.signUpPasswordEt.text.toString()
-                showCustomToast("$certificationPassword")
-                val action = IdPasswordFragmentDirections.navToBirthDayFragment()
+                // 데이터 전달
+                val data = PostSignUpRequest(phoneEmail = args.getPhoneEmail!!.phoneEmail, id = certificationId, password = certificationPassword)
+
+                // 화면 전환
+                val action = IdPasswordFragmentDirections.navToBirthDayFragment(data)
                 Navigation.findNavController(requireActivity(), R.id.signUp_container).navigate(action)
             }
         }

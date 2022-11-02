@@ -19,7 +19,7 @@ class LoadingDialog(context: Context) : Dialog(context) {
         setCanceledOnTouchOutside(false)
         setCancelable(false)
         window!!.setBackgroundDrawable(ColorDrawable())
-        window!!.setDimAmount(0.2f)
+        window!!.setDimAmount(0.5f)
     }
 
     override fun show() {

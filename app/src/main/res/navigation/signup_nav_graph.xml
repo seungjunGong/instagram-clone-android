@@ -19,8 +19,11 @@
             app:destination="@id/emailTab"/>
         <action
             android:id="@+id/navToIdPasswordFragment"
-            app:destination="@id/idPasswordFragment"/>
+            app:destination="@id/idPasswordFragment">
+        </action>
+
     </fragment>
+
 
     <fragment
         android:id="@+id/idPasswordFragment"
@@ -30,6 +33,10 @@
         <action
             android:id="@+id/navToBirthDayFragment"
             app:destination="@id/birthDayFragment"/>
+        <argument
+            android:name="getPhoneEmail"
+            app:argType="com.softsquared.instagramlagame.src.signup.sginup_models.PostSignUpRequest"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/birthDayFragment"
@@ -39,6 +46,10 @@
         <action
             android:id="@+id/navToAgreementFragment"
             app:destination="@id/agreementFragment" />
+        <argument
+            android:name="getIdPassword"
+            app:argType="com.softsquared.instagramlagame.src.signup.sginup_models.PostSignUpRequest"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/agreementFragment"
@@ -48,12 +59,21 @@
         <action
             android:id="@+id/navToUserNameFragment"
             app:destination="@id/userNameFragment" />
+        <argument
+            android:name="getBirthDay"
+            app:argType="com.softsquared.instagramlagame.src.signup.sginup_models.PostSignUpRequest"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/userNameFragment"
         android:name="com.softsquared.instagramlagame.src.signup.user_name.UserNameFragment"
         android:label="fragment_user_name"
-        tools:layout="@layout/fragment_user_name" />
+        tools:layout="@layout/fragment_user_name" >
+        <argument
+            android:name="getNext"
+            app:argType="com.softsquared.instagramlagame.src.signup.sginup_models.PostSignUpRequest"
+            app:nullable="true" />
+    </fragment>
 
 
 </navigation>

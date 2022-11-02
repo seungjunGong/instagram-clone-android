@@ -1,7 +1,7 @@
 package com.softsquared.instagramlagame.config
 
-import com.softsquared.instagramlagame.config.ApplicationClass.ApplicationClass.Companion.X_ACCESS_TOKEN
-import com.softsquared.instagramlagame.config.ApplicationClass.ApplicationClass.Companion.sSharedPreferences
+import com.softsquared.instagramlagame.config.ApplicationClass.Companion.X_ACCESS_TOKEN
+import com.softsquared.instagramlagame.config.ApplicationClass.Companion.sSharedPreferences
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

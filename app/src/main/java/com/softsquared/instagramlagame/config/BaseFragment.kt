@@ -19,6 +19,7 @@ abstract class BaseFragment<B : ViewBinding>(
 ) : Fragment(layoutResId) {
     private var _binding: B? = null
     lateinit var mLoadingDialog: LoadingDialog
+    lateinit var mAlertDialog: com.softsquared.instagramlagame.util.AlertDialog
 
     protected val binding get() = _binding!!
 
@@ -50,4 +51,17 @@ abstract class BaseFragment<B : ViewBinding>(
             mLoadingDialog.dismiss()
         }
     }
+
+    fun showAlertDialog(context: Context, title: String,content: String,  topBt: String, bottomBt: String) {
+        mAlertDialog = com.softsquared.instagramlagame.util.AlertDialog(context, requireActivity(), title, content, topBt, bottomBt)
+        mAlertDialog.show()
+    }
+
+    fun dismissAlertDialog() {
+        if (mAlertDialog.isShowing) {
+            mAlertDialog.dismiss()
+        }
+    }
+
+
 }

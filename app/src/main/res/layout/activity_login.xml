@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_activity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -79,19 +80,42 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/login_complete_tv"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="로그인"
-            android:clickable="false"
-            android:textColor="@color/bright_sky_blue_tv_color"
-            android:textSize="@dimen/login_large_size_tv"
-            android:layout_marginTop="@dimen/login_basic_margin_top"
-            android:background="@drawable/bt_login_border"
-            android:layout_marginEnd="@dimen/login_side_margin"
-            android:layout_marginStart="@dimen/login_side_margin"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_basic_margin_top">
+
+            <TextView
+                android:id="@+id/login_complete_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:text="로그인"
+                android:clickable="false"
+                android:textColor="@color/bright_sky_blue_tv_color"
+                android:textSize="@dimen/login_large_size_tv"
+                android:background="@drawable/bt_login_border"
+                android:layout_marginEnd="@dimen/login_side_margin"
+                android:layout_marginStart="@dimen/login_side_margin"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ProgressBar
+                android:id="@+id/login_progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                android:indeterminateDrawable="@anim/loading_sgin_up_lotate"
+                android:progressBackgroundTint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
@@ -157,7 +181,35 @@
                 android:layout_gravity="center_vertical"
                 android:background="@color/login_border_color" />
 
+
+
         </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView
+                android:id="@+id/login_facebook_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/facebook_logo"
+                android:layout_marginEnd="5dp" />
+
+            <TextView
+                android:id="@+id/login_facebook_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Facebook으로 로그인"
+                android:textColor="@color/basic_sky_blue"
+                android:textSize="@dimen/login_large_size_tv"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 
 
