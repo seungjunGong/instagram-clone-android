@@ -23,7 +23,6 @@ class LoginAlertDialog(context: Context, private val activity: Activity, private
 
 
         setCanceledOnTouchOutside(false)
-        setCancelable(false)
         window!!.setBackgroundDrawable(ColorDrawable())
         window!!.setDimAmount(0.5f)
 

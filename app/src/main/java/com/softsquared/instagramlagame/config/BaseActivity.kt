@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.softsquared.instagramlagame.util.LoadingDialog
+import com.softsquared.instagramlagame.util.LoadingMainDialog
 import com.softsquared.instagramlagame.util.LoginAlertDialog
 
 
@@ -24,6 +25,7 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
     lateinit var mLoadingDialog: LoadingDialog
     lateinit var mAlertDialog: com.softsquared.instagramlagame.util.AlertDialog
     lateinit var mLoginAlertDialog: LoginAlertDialog
+    lateinit var mLoadingMainDialog: LoadingMainDialog
 
     // 뷰 바인딩 객체를 받아서 inflate해서 화면을 만들어줌.
     // 즉 매번 onCreate에서 setContentView를 하지 않아도 됨.
@@ -80,6 +82,17 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
     fun dismissLoginAlertDialog() {
         if (mLoginAlertDialog.isShowing) {
             mLoginAlertDialog.dismiss()
+        }
+    }
+
+    fun showLoadingMainDialog(context: Context) {
+        mLoadingMainDialog = LoadingMainDialog(context)
+        mLoadingMainDialog.show()
+    }
+
+    fun dismissLoadingMainDialog() {
+        if (mLoadingMainDialog.isShowing) {
+            mLoadingMainDialog.dismiss()
         }
     }
 

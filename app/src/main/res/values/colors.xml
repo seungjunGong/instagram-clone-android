@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="basic_gray">#666666</color>
     <color name="basic_profile_border_line">#CECECE</color>
-    <color name="basic_sky_blue">#0F9EF1</color>
+    <color name="basic_sky_blue">#0195F7</color>
     <color name="bright_gray">#DBDBDB</color>
     <color name="translucent_black">#80000000</color>
     <color name="login_color_et">#858585</color>
@@ -18,4 +18,6 @@
     <color name="basic_dark_blue">#01356A</color>
     <color name="bright_sky_blue_tv_color">#E7F0FD</color>
     <color name="red_emphasis">#E3242B</color>
+    <color name="high_bright_gray">#EFEFEF</color>
+    <color name="basic_green">#008000</color>
 </resources>

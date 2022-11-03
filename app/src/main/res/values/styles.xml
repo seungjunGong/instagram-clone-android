@@ -3,4 +3,13 @@
     <style name="tabTextSize" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="TabTheme" parent="TextAppearance.Design.Tab">
+        <item name="colorPrimary">@color/white</item>                                <!-- 배경 -->
+
+        <item name="android:textColorPrimary">@color/black</item>       <!-- 탭바 선택된 텍스트 -->
+        <item name="android:textColorSecondary">@color/basic_gray</item>     <!-- 탭바 텍스트 -->
+
+        <item name="colorAccent">@color/black</item>                    <!-- 하단 움직이는 바 색-->
+    </style>
 </resources>

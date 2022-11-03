@@ -10,6 +10,7 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.softsquared.instagramlagame.util.LoadingDialog
+import com.softsquared.instagramlagame.util.LoadingMainDialog
 
 
 // Fragment의 기본을 작성, 뷰 바인딩 활용
@@ -20,6 +21,7 @@ abstract class BaseFragment<B : ViewBinding>(
     private var _binding: B? = null
     lateinit var mLoadingDialog: LoadingDialog
     lateinit var mAlertDialog: com.softsquared.instagramlagame.util.AlertDialog
+    lateinit var mLoadingMainDialog: LoadingMainDialog
 
     protected val binding get() = _binding!!
 
@@ -60,6 +62,17 @@ abstract class BaseFragment<B : ViewBinding>(
     fun dismissAlertDialog() {
         if (mAlertDialog.isShowing) {
             mAlertDialog.dismiss()
+        }
+    }
+
+    fun showLoadingMainDialog(context: Context) {
+        mLoadingMainDialog = LoadingMainDialog(context)
+        mLoadingMainDialog.show()
+    }
+
+    fun dismissLoadingMainDialog() {
+        if (mLoadingMainDialog.isShowing) {
+            mLoadingMainDialog.dismiss()
         }
     }
 

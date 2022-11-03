@@ -13,4 +13,7 @@
     <dimen name="login_small_tv">12sp</dimen>
     <dimen name="login_emphasis_tv">13sp</dimen>
     <dimen name="agreement_top_margin">30dp</dimen>
+    <dimen name="profile_title_size">22sp</dimen>
+    <dimen name="profile_basic_data_padding">25dp</dimen>
+    <dimen name="profile_text_size">14sp</dimen>
 </resources>
