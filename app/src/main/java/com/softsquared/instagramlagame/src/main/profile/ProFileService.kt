@@ -1,8 +1,11 @@
 package com.softsquared.instagramlagame.src.main.profile
 
 import com.softsquared.instagramlagame.config.ApplicationClass
+import com.softsquared.instagramlagame.src.main.profile.edit.models.PatchProFileEditRequest
+import com.softsquared.instagramlagame.src.main.profile.edit.models.ProFileEditResponse
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 

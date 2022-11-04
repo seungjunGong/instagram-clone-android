@@ -226,6 +226,7 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/profile_go_edit_bt"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="프로필 편집"
@@ -307,18 +308,7 @@
                 app:tabIndicatorColor="@color/black"
                 app:tabRippleColor="@android:color/transparent">
 
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:icon="@drawable/ic_grid_black" />-->
-
-<!--                <com.google.android.material.tabs.TabItem-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:icon="@drawable/ic_tag_custom" />-->
-
             </com.google.android.material.tabs.TabLayout>
-
 
 
 
@@ -329,14 +319,25 @@
                 android:layout_height="1dp"
                 android:background="@color/high_bright_gray" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/profile_tab_vp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/profile_tab_vp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
+
+
+    <include
+        android:id="@+id/profile_loading"
+        layout="@layout/dialog_main_loading"
+        android:visibility="gone"/>
 
 
 

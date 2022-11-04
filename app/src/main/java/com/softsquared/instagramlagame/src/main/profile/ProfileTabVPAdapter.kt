@@ -4,24 +4,33 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.softsquared.instagramlagame.src.main.profile.tab.ProFilePostFragment
-import com.softsquared.instagramlagame.src.main.profile.tab.ProFileTagFragment
+import com.softsquared.instagramlagame.src.main.profile.tab.ProFileTabFragment
 
-class ProfileTabVPAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+class ProfileTabVPAdapter(fragmentActivity: FragmentActivity, private val inReels : Boolean) : FragmentStateAdapter(fragmentActivity) {
 
-    private val TYPE_POST = 0
-    private val TYPE_TAG = 1
-
-    private var listType: List<Int> = listOf( TYPE_POST, TYPE_TAG)
+    private var listINREELSType: List<Int> = listOf(0, 1, 2)
+    private var listBASICEType: List<Int> = listOf(0, 1)
 
     override fun getItemCount(): Int {
-        return listType.size
+        return if(inReels){
+            listINREELSType.size
+        }else{
+            listBASICEType.size
+        }
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            TYPE_POST -> ProFileTagFragment()
-            else -> ProFileTagFragment()
+        if(inReels){
+            return when(position){
+                0 -> ProFileTabFragment("post")
+                1 -> ProFileTabFragment("reels")
+                else -> ProFileTabFragment("tag")
+            }
+        } else {
+            return when(position){
+                0 -> ProFileTabFragment("post")
+                else -> ProFileTabFragment("tag")
+            }
         }
     }
 }

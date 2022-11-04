@@ -35,9 +35,101 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
 
+        <action
+            android:id="@+id/navToProFileEditFragment"
+            app:destination="@id/proFileEditFragment">
+        </action>
+
+
+
     </fragment>
+    <fragment
+        android:id="@+id/proFileEditFragment"
+        android:name="com.softsquared.instagramlagame.src.main.profile.edit.ProFileEditFragment"
+        android:label="fragment_profile_edit"
+        tools:layout="@layout/fragment_profile_edit" >
 
+        <argument
+            android:name="getEditData"
+            app:argType="String"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <argument
+            android:name="getDataType"
+            app:argType="String"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+        <action
+            android:id="@+id/action_proFileEditFragment_to_proFileNameEditFragment"
+            app:destination="@id/proFileNameEditFragment" />
+        <action
+            android:id="@+id/action_proFileEditFragment_to_proFileIntroduceEditFragment"
+            app:destination="@id/proFileIntroduceEditFragment" />
+        <action
+            android:id="@+id/action_proFileEditFragment_to_proFileNickNameEditFragment"
+            app:destination="@id/proFileNickNameEditFragment" />
+        <action
+            android:id="@+id/action_proFileEditFragment_to_proFileLinkEditFragment"
+            app:destination="@id/proFileLinkEditFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/proFileLinkEditFragment"
+        android:name="com.softsquared.instagramlagame.src.main.profile.edit.ProFileLinkEditFragment"
+        android:label="fragment_profile_link_edit"
+        tools:layout="@layout/fragment_profile_link_edit" >
+
+        <argument
+            android:name="getEditData"
+            app:argType="String"
+            android:defaultValue= ""/>
+
+        <action
+            android:id="@+id/action_proFileLinkEditFragment_to_proFileEditFragment"
+            app:destination="@id/proFileEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proFileNickNameEditFragment"
+        android:name="com.softsquared.instagramlagame.src.main.profile.edit.ProFileNickNameEditFragment"
+        android:label="fragment_profile_nickname_edit"
+        tools:layout="@layout/fragment_profile_nickname_edit" >
+
+        <argument
+            android:name="getEditData"
+            app:argType="String"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_proFileNickNameEditFragment_to_proFileEditFragment"
+            app:destination="@id/proFileEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proFileIntroduceEditFragment"
+        android:name="com.softsquared.instagramlagame.src.main.profile.edit.ProFileIntroduceEditFragment"
+        android:label="fragment_profile_introduce_edit"
+        tools:layout="@layout/fragment_profile_introduce_edit" >
+
+        <argument
+            android:name="getEditData"
+            app:argType="String"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_proFileIntroduceEditFragment_to_proFileEditFragment"
+            app:destination="@id/proFileEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proFileNameEditFragment"
+        android:name="com.softsquared.instagramlagame.src.main.profile.edit.ProFileNameEditFragment"
+        android:label="fragment_profile_name_edit"
+        tools:layout="@layout/fragment_profile_name_edit" >
+
+        <argument
+            android:name="getEditData"
+            app:argType="String"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_proFileNameEditFragment_to_proFileEditFragment"
+            app:destination="@id/proFileEditFragment" />
+    </fragment>
 
 
 </navigation>

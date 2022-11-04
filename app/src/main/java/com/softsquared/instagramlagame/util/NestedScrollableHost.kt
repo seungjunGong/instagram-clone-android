@@ -1,5 +1,3 @@
-package com.softsquared.instagramlagame.util
-
 /*
  * Copyright 2019 The Android Open Source Project
  *
@@ -15,6 +13,8 @@ package com.softsquared.instagramlagame.util
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.softsquared.instagramlagame.util
 
 import android.content.Context
 import android.util.AttributeSet

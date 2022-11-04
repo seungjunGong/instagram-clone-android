@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/proFileEditFragment"
+    tools:context=".src.main.profile.edit.ProFileEditFragment">
+
+    <ImageView
+        android:id="@+id/profile_edit_close_bt"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/basic_margin_side"
+        android:layout_marginTop="@dimen/basic_margin_side"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:text="프로필 편집"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/profile_edit_close_bt"
+        app:layout_constraintStart_toEndOf="@id/profile_edit_close_bt"
+        app:layout_constraintBottom_toBottomOf="@id/profile_edit_close_bt"
+        android:layout_marginStart="30dp"/>
+
+    <ImageView
+        android:id="@+id/profile_edit_check_bt"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_sky_blue_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/basic_margin_side"
+        android:layout_marginTop="@dimen/basic_margin_side"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/profile_edit_close_bt"
+        app:layout_constraintStart_toStartOf="@id/profile_edit_close_bt"
+        app:layout_constraintEnd_toEndOf="@id/profile_edit_check_bt">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_edit_image_iv"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent"
+            app:civ_border_overlay="true"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/basic_profile_border_line"
+            android:src="@drawable/ic_basic_profile"
+            android:clickable="true"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로필 사진 변경"
+            android:textColor="@color/basic_sky_blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/basic_margin_side"
+            android:layout_marginStart="@dimen/basic_margin_side">
+
+            <LinearLayout
+                android:id="@+id/profile_go_edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/login_basic_margin_top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/edit_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이름"
+                    android:textColor="@color/basic_gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/edit_name_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+
+                <View
+                    android:id="@+id/edit_name_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/login_border_color"
+                    app:layout_constraintBottom_toTopOf="@id/login_signUp_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/profile_go_edit_NickName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/login_basic_margin_top"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/edit_nickName_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사용자 이름"
+                    android:textColor="@color/basic_gray"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/edit_nickName_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+
+                <View
+                    android:id="@+id/edit_nickName_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/login_border_color"
+                    app:layout_constraintBottom_toTopOf="@id/login_signUp_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/profile_go_edit_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/login_basic_margin_top">
+
+                <TextView
+                    android:id="@+id/edit_introduce_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="소개"
+                    android:textColor="@color/basic_gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/edit_introduce_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"/>
+
+                <View
+                    android:id="@+id/edit_introduce_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/login_border_color"
+                    app:layout_constraintBottom_toTopOf="@id/login_signUp_tv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            </LinearLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_go_edit_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/login_basic_margin_top">
+
+
+                <TextView
+                    android:id="@+id/edit_link_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="링크"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
+                    android:id="@+id/edit_link_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/basic_gray"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/login_basic_margin_top"
+            android:background="@color/high_bright_gray"
+            app:layout_constraintBottom_toTopOf="@id/login_signUp_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로페셔널 계정으로 전환"
+            android:layout_marginBottom="@dimen/login_basic_margin_top"
+            android:textColor="@color/basic_sky_blue"
+            android:textSize="18sp"
+            android:layout_marginStart="@dimen/basic_margin_side"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/login_basic_margin_top"
+            android:background="@color/high_bright_gray"
+            app:layout_constraintBottom_toTopOf="@id/login_signUp_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아바타 만들기"
+            android:layout_marginBottom="@dimen/login_basic_margin_top"
+            android:textColor="@color/basic_sky_blue"
+            android:textSize="18sp"
+            android:layout_marginStart="@dimen/basic_margin_side"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/login_basic_margin_top"
+            android:background="@color/high_bright_gray"
+            app:layout_constraintBottom_toTopOf="@id/login_signUp_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개인정보 설정"
+            android:layout_marginBottom="@dimen/login_basic_margin_top"
+            android:textColor="@color/basic_sky_blue"
+            android:textSize="18sp"
+            android:layout_marginStart="@dimen/basic_margin_side"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/login_basic_margin_top"
+            android:background="@color/high_bright_gray"
+            app:layout_constraintBottom_toTopOf="@id/login_signUp_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <include
+        android:id="@+id/profile_loading"
+        layout="@layout/dialog_main_loading"
+        android:visibility="gone"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

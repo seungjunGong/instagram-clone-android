@@ -5,7 +5,6 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class PostSignUpRequest (
     @SerializedName("birth")
     val birth: String = "",
@@ -17,4 +16,4 @@ data class PostSignUpRequest (
     val password: String = "",
     @SerializedName("userKey")
     val phoneEmail: String = ""
-):Parcelable
+)

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileNameEditFragment"
+    tools:context=".src.main.profile.edit.ProFileNameEditFragment">
+
+    <ImageView
+        android:id="@+id/profile_edit_close_bt"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/basic_margin_side"
+        android:layout_marginTop="@dimen/basic_margin_side"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:text="이름"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/profile_edit_close_bt"
+        app:layout_constraintStart_toEndOf="@id/profile_edit_close_bt"
+        app:layout_constraintBottom_toBottomOf="@id/profile_edit_close_bt"
+        android:layout_marginStart="30dp"/>
+
+    <ImageView
+        android:id="@+id/profile_edit_check_bt"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_sky_blue_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/basic_margin_side"
+        android:layout_marginTop="@dimen/basic_margin_side"/>
+
+    <TextView
+        android:id="@+id/profile_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이름"
+        android:textColor="@color/basic_gray"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/profile_edit_close_bt"
+        app:layout_constraintStart_toStartOf="@id/profile_edit_close_bt"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/profile_name_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/basic_margin_side"
+        android:layout_marginEnd="@dimen/basic_margin_side"
+        android:backgroundTint="@color/bright_gray"
+        android:textSize="@dimen/profile_text_size"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@color/basic_green"
+        app:layout_constraintTop_toBottomOf="@id/profile_name_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/profile_name_description_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/basic_gray"
+        android:text="사람들이 이름, 별명 또는 비즈니스 이름 등 회원님의 알려진 이름을\n사용하여 회원님의 계정을 찾을 수 있도록 도와주세요."
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/profile_name_et"
+        app:layout_constraintStart_toStartOf="@id/profile_name_et"
+        app:layout_constraintEnd_toEndOf="@id/profile_name_et"
+        android:layout_marginTop="10dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/basic_gray"
+        android:text="이름은 14일 안에 두번만 변경할 수 있습니다."
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/profile_name_description_tv"
+        app:layout_constraintStart_toStartOf="@id/profile_name_et"
+        android:layout_marginTop="10dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

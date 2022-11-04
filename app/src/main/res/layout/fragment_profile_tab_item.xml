@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profileTagFragment"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".src.main.profile.tab.ProFileTabFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/profile_grid_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:id="@+id/profile_tab_zero_tag_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원님이 나온 사진 및 \n동영상"
+                android:gravity="center"
+                android:textSize="@dimen/profile_title_size"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:paddingTop="80dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사람들이 회원님을 사진 및 동여상에\n태그하면 태그된 사진 및 동여상이 여기에\n표시됩니다."
+                android:textSize="@dimen/profile_text_size"
+                android:textColor="@color/basic_gray"
+                android:layout_marginBottom="60dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/profile_tab_zero_post_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="프로필"
+                android:textSize="@dimen/profile_title_size"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:paddingTop="100dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="사진과 동영상을 공유하면 프로필에\n표시됩니다."
+                android:textSize="@dimen/profile_text_size"
+                android:textColor="@color/basic_gray"
+                android:gravity="center"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/profile_tab_go_post_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="첫 사진/동영상을 공유해보세요"
+                android:layout_marginBottom="80dp"
+                android:textColor="@color/basic_sky_blue"
+                android:textSize="@dimen/profile_text_size"
+                android:layout_marginTop="15dp"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:scrollbars="none" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <LinearLayout
+        android:id="@+id/profile_vp_complete_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_grid_item_layout"
+        app:layout_constraintStart_toStartOf="@id/profile_grid_item_layout"
+        app:layout_constraintEnd_toEndOf="@id/profile_grid_item_layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="프로필을 완성하세요"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/basic_margin_side"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/basic_margin_side">
+
+            <TextView
+                android:id="@+id/profile_vp_complete_profile_count_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2/4개"
+                android:textSize="12sp"
+                android:textColor="@color/basic_green"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="완료"
+                android:textColor="@color/basic_gray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/profile_vp_complete_profile_count_tag"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        <com.softsquared.instagramlagame.util.NestedScrollableHost
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="@dimen/basic_margin_side">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_complete_rv"
+                android:layout_width="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/profile_complete_rcv_item"
+                android:orientation="horizontal"/>
+
+        </com.softsquared.instagramlagame.util.NestedScrollableHost>
+
+
+        <View
+            android:id="@+id/profile_scroll_divider_tag"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/high_bright_gray"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/profile_nickName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
