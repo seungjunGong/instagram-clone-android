@@ -28,10 +28,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     // 릴스 확인
     private var inReels = false
-    private var myProFileUrl = ""
+    // 사람 찾아보기 토글
+    private var showRecommendFollow = false
+    private var myProFileUrl : String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        binding.profileFollowFindLayout.visibility = View.GONE
 
         // 내 프로필 정보 받아오기
         binding.profileLoading.mainLoading.visibility = View.VISIBLE
@@ -51,13 +56,25 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         // 프로필 편집
         binding.profileGoEditBt.setOnClickListener {
             with(binding){
-                // 데이터 전달
-                val action = ProfileFragmentDirections.navToProFileEditFragment("")
+                val action = ProfileFragmentDirections.navToProFileEditFragment()
                 Navigation.findNavController(requireView()).navigate(action)
             }
         }
 
-
+        // 사람 찾아보기 toggle
+        binding.profileMorePersonBt.setOnClickListener {
+            showRecommendFollow = if(showRecommendFollow){
+                binding.profileMorePersonBt.setImageResource(R.drawable.ic_profile_add_follow_close)
+                binding.profileFollowFindLayout.visibility = View.GONE
+                binding.profileWholeScroll.invalidate()
+                false
+            } else{
+                binding.profileMorePersonBt.setImageResource(R.drawable.ic_profile_add_follow)
+                binding.profileFollowFindLayout.visibility = View.VISIBLE
+                binding.profileWholeScroll.invalidate()
+                true
+            }
+        }
     }
     // 탭 레이아웃 커스텀
     private fun getTabView(position: Int): View {
@@ -88,11 +105,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         if(response.isSuccess){
             with(response.resultProFileMyData){
                 myProFileUrl = profileUrl
-                if (link == ""){
-                    if(description == ""){
-                        binding.profileUserIntroduceTv.visibility = View.GONE
+                if (link != ""){
+                    if(description != ""){
+                        binding.profileUserIntroduceTv.visibility = View.VISIBLE
                     }
-                    binding.profileGoMyLinkTv.visibility = View.GONE
+                    binding.profileGoMyLinkTv.visibility = View.VISIBLE
                 }
                 if(profileUrl != ""){
                     Glide.with(requireContext()).load(profileUrl).into(binding.profileImageIv)

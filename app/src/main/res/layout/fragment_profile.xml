@@ -61,6 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/profile_whole_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -237,63 +238,71 @@
                         android:background="@drawable/bright_gray_style" />
 
                     <ImageView
+                        android:id="@+id/profile_more_person_bt"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="7dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_profile_add_follow"
+                        android:src="@drawable/ic_profile_add_follow_close"
                         android:background="@drawable/bright_gray_style"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/profile_follow_find_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="20dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp">
 
-                        <TextView
-                            android:id="@+id/profile_find_person_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="사람 찾아보기"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/profile_text_size"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
 
-                        <TextView
-                            android:id="@+id/profile_follow_find_all_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="모두 보기"
-                            android:textSize="15sp"
-                            android:textColor="@color/basic_sky_blue"
-                            app:layout_constraintTop_toTopOf="@id/profile_find_person_tv"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintBottom_toBottomOf="@id/profile_find_person_tv"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/profile_follow_rcv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:listitem="@layout/profile_follow_item"
-                        android:orientation="horizontal"
-                        android:scrollbars="none"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             </LinearLayout>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/profile_follow_find_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/basic_margin_side"
+                android:layout_marginEnd="@dimen/basic_margin_side"
+                android:layout_marginTop="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/profile_find_person_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="사람 찾아보기"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/profile_text_size"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/profile_follow_find_all_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="모두 보기"
+                        android:textSize="15sp"
+                        android:textColor="@color/basic_sky_blue"
+                        app:layout_constraintTop_toTopOf="@id/profile_find_person_tv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@id/profile_find_person_tv"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/profile_follow_rcv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/profile_follow_item"
+                    android:orientation="horizontal"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 

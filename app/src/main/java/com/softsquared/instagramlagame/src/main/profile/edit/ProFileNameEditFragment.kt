@@ -1,6 +1,7 @@
 package com.softsquared.instagramlagame.src.main.profile.edit
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
@@ -23,12 +24,11 @@ class ProFileNameEditFragment : BaseFragment<FragmentProfileNameEditBinding>(Fra
             Navigation.findNavController(requireView()).navigate(action)
         }
 
-        binding.profileNameEt.text = args.getEditData
+        binding.profileNameEt.setText(args.getEditName)
 
         binding.profileEditCloseBt.setOnClickListener {
-            val fragmentManager : FragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().remove(this).commit()
-            fragmentManager.popBackStack()
+            Navigation.findNavController(it).navigateUp()
         }
+
     }
 }

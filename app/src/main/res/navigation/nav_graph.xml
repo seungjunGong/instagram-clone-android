@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/homeVpControllerFragment">
+
+    <fragment
+        android:id="@+id/homeVpControllerFragment"
+        android:name="com.softsquared.instagramlagame.src.main.home.HomeVpControllerFragment"
+        android:label="fragment_home_vp_controller"
+        tools:layout="@layout/fragment_home_vp_controller" />
 
     <fragment
         android:id="@+id/homeFragment"
@@ -51,14 +57,15 @@
 
         <argument
             android:name="getEditData"
-            app:argType="String"
+            app:argType="string"
             app:nullable="true"
             android:defaultValue="@null"/>
         <argument
             android:name="getDataType"
-            app:argType="String"
+            app:argType="string"
             app:nullable="true"
             android:defaultValue="@null"/>
+
         <action
             android:id="@+id/action_proFileEditFragment_to_proFileNameEditFragment"
             app:destination="@id/proFileNameEditFragment" />
@@ -71,6 +78,12 @@
         <action
             android:id="@+id/action_proFileEditFragment_to_proFileLinkEditFragment"
             app:destination="@id/proFileLinkEditFragment" />
+        <action
+            android:id="@+id/action_proFileEditFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/profileFragment"/>
+
 
     </fragment>
     <fragment
@@ -80,13 +93,16 @@
         tools:layout="@layout/fragment_profile_link_edit" >
 
         <argument
-            android:name="getEditData"
-            app:argType="String"
-            android:defaultValue= ""/>
+            android:name="getEditLink"
+            app:argType="string"
+            android:defaultValue="" />
 
         <action
             android:id="@+id/action_proFileLinkEditFragment_to_proFileEditFragment"
-            app:destination="@id/proFileEditFragment" />
+            app:destination="@id/proFileEditFragment"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/proFileEditFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/proFileNickNameEditFragment"
@@ -95,12 +111,14 @@
         tools:layout="@layout/fragment_profile_nickname_edit" >
 
         <argument
-            android:name="getEditData"
-            app:argType="String"
-            android:defaultValue=""/>
+            android:name="getEditNickName"
+            app:argType="com.softsquared.instagramlagame.src.main.profile.edit.models.PatchProFileEditRequest" />
         <action
             android:id="@+id/action_proFileNickNameEditFragment_to_proFileEditFragment"
-            app:destination="@id/proFileEditFragment" />
+            app:destination="@id/proFileEditFragment"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/proFileEditFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/proFileIntroduceEditFragment"
@@ -109,12 +127,16 @@
         tools:layout="@layout/fragment_profile_introduce_edit" >
 
         <argument
-            android:name="getEditData"
-            app:argType="String"
-            android:defaultValue=""/>
+            android:name="getEditIntroduce"
+            app:argType="string"
+            android:defaultValue=""
+            />
         <action
             android:id="@+id/action_proFileIntroduceEditFragment_to_proFileEditFragment"
-            app:destination="@id/proFileEditFragment" />
+            app:destination="@id/proFileEditFragment"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/proFileEditFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/proFileNameEditFragment"
@@ -123,12 +145,16 @@
         tools:layout="@layout/fragment_profile_name_edit" >
 
         <argument
-            android:name="getEditData"
-            app:argType="String"
-            android:defaultValue=""/>
+            android:name="getEditName"
+            app:argType="string"
+            android:defaultValue=""
+            />
         <action
             android:id="@+id/action_proFileNameEditFragment_to_proFileEditFragment"
-            app:destination="@id/proFileEditFragment" />
+            app:destination="@id/proFileEditFragment"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/proFileEditFragment"
+            />
     </fragment>
 
 

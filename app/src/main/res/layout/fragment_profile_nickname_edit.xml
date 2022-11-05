@@ -34,11 +34,28 @@
         android:id="@+id/profile_edit_check_bt"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_sky_blue_check"
+        android:src="@drawable/ic_bright_sky_blue_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="@dimen/basic_margin_side"
         android:layout_marginTop="@dimen/basic_margin_side"/>
+
+    <ProgressBar
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/profile_nickname_et"
+        app:layout_constraintEnd_toEndOf="@id/profile_nickname_et"
+        android:layout_marginEnd="10dp"
+        android:indeterminateDrawable="@anim/progress_lotate"
+        android:progressBackgroundTint="@color/basic_gray"
+        android:id="@+id/loading_progressBar"/>
+
+    <include
+        android:id="@+id/loading_check"
+        layout="@layout/util_loading_check"
+        android:visibility="gone"/>
+
 
 
     <EditText

@@ -23,12 +23,10 @@ class ProFileLinkEditFragment : BaseFragment<FragmentProfileLinkEditBinding>(Fra
             Navigation.findNavController(requireView()).navigate(action)
         }
 
-        binding.profileLinkEt.text = args.getEditData
+        binding.profileLinkEt.setText(args.getEditLink)
 
         binding.profileEditCloseBt.setOnClickListener {
-            val fragmentManager : FragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().remove(this).commit()
-            fragmentManager.popBackStack()
+            Navigation.findNavController(it).navigateUp()
         }
     }
 }

@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
+
 data class ResultProFileMyData(
     @SerializedName("description")
     val description: String = "",
@@ -25,4 +25,4 @@ data class ResultProFileMyData(
     val profileUrl: String = "",
     @SerializedName("userId")
     val userId: Int = 0
-): Parcelable
+)

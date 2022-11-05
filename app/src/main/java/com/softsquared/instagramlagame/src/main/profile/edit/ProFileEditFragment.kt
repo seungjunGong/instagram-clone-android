@@ -1,8 +1,10 @@
 package com.softsquared.instagramlagame.src.main.profile.edit
 
 import android.os.Bundle
+import android.system.Os.bind
 import android.view.View
 import androidx.annotation.Dimension
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -11,6 +13,7 @@ import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentProfileEditBinding
 import com.softsquared.instagramlagame.src.main.profile.ProFileFragmentInterface
 import com.softsquared.instagramlagame.src.main.profile.ProFileService
+import com.softsquared.instagramlagame.src.main.profile.ProfileFragmentDirections
 import com.softsquared.instagramlagame.src.main.profile.edit.models.PatchProFileEditRequest
 import com.softsquared.instagramlagame.src.main.profile.edit.models.ProFileEditResponse
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
@@ -19,8 +22,6 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
         ProFileFragmentInterface, ProFileEditFragmentInterface {
 
     private val args: ProFileEditFragmentArgs by navArgs()
-    private var myProFileUrl = ""
-    private var myProFilLink = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,67 +31,54 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
         ProFileService(this).tryGetProFileMyData()
 
 
-
-
         // 현재 페이지 close
         binding.profileEditCloseBt.setOnClickListener {
-            val fragmentManager : FragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().remove(this).commit()
-            fragmentManager.popBackStack()
+            Navigation.findNavController(it).navigateUp()
         }
 
         // 이름 수정
         binding.profileGoEditName.setOnClickListener {
             // 데이터 전달
-            val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProFileNameEditFragment(binding.editNameEt.text)
+            val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProFileNameEditFragment(getEditName = binding.editNameEt.text.toString())
             Navigation.findNavController(requireView()).navigate(action)
         }
         // 사용자 이름 수정
         binding.profileGoEditNickName.setOnClickListener {
-            val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProFileNickNameEditFragment(binding.editNickNameEt.text)
+            val data =
+                PatchProFileEditRequest(
+                    description = binding.editIntroduceEt.text.toString(),
+                    profileUrl = binding.editUrlEt.text.toString(),
+                    name = binding.editNameEt.text.toString(),
+                    nickname = binding.editNickNameEt.text.toString(),
+                    link = binding.editLinkEt.text.toString())
+            val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProFileNickNameEditFragment(getEditNickName= data)
             Navigation.findNavController(requireView()).navigate(action)
         }
         // 소개 수정
         binding.profileGoEditIntroduce.setOnClickListener {
-            val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProFileIntroduceEditFragment(binding.editIntroduceEt.text)
+            val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProFileIntroduceEditFragment(getEditIntroduce= binding.editIntroduceEt.text.toString())
             Navigation.findNavController(requireView()).navigate(action)
         }
         // 링크 수정
         binding.profileGoEditLink.setOnClickListener{
-            val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProFileLinkEditFragment(myProFileUrl)
+            val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProFileLinkEditFragment(getEditLink= binding.editLinkEt.text.toString())
             Navigation.findNavController(requireView()).navigate(action)
         }
 
+
+        // 체크 버튼 클릭시
         binding.profileEditCheckBt.setOnClickListener {
-
-            if(args.getDataType != null) {
-                // 수정 완료시
-                when (args.getDataType) {
-                    "링크" -> if (args.getEditData != "") {
-                        binding.editLinkCount.text = "1"
-                    }
-                    "이름" -> binding.editNameEt.text = args.getEditData
-                    "닉네임" -> binding.editNickNameEt.text = args.getEditData
-                    "소개" -> binding.editIntroduceEt.text = args.getEditData
-                }
-
-                val data = if (args.getDataType == "링크") {
+            // 수정 완료시
+                val data =
                     PatchProFileEditRequest(
-                        binding.editIntroduceEt.text.toString(),
-                        args.getEditData,
-                        binding.editNameEt.text.toString(),
-                        binding.editNickNameEt.text.toString(),
-                        myProFilLink)
-                } else {
-                    PatchProFileEditRequest(binding.editIntroduceEt.text.toString(),
-                        myProFilLink,
-                        binding.editNameEt.text.toString(),
-                        binding.editNickNameEt.text.toString(),
-                        myProFileUrl)
-                }
+                        description = binding.editIntroduceEt.text.toString(),
+                        profileUrl = binding.editUrlEt.text.toString(),
+                        name = binding.editNameEt.text.toString(),
+                        nickname = binding.editNickNameEt.text.toString(),
+                        link = binding.editLinkEt.text.toString())
                 ProFileEditService(this).tryPatchProFileEdit(data)
-                showLoadingDialog(requireContext())
-            }
+                binding.loadingCheck.utilLoadingCheck.visibility = View.VISIBLE
+
         }
 
 
@@ -103,7 +91,7 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
         if(response.isSuccess){
             with(response.resultProFileMyData){
                 if(profileUrl != ""){
-                    myProFileUrl = profileUrl
+                    binding.editUrlEt.text = profileUrl
                     Glide.with(requireContext()).load(this?.profileUrl).into(binding.profileEditImageIv)
                 }
                 if(name != ""){
@@ -120,14 +108,26 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
                 }
                 if(link != "") {
                     binding.editLinkCount.text = "1"
-                    myProFilLink = link
+                    binding.editLinkEt.text = link
                 }
 
 
             }
-
-
         }
+        if (args.getDataType != null){
+            when (args.getDataType) {
+                "링크" -> {
+                    if (args.getEditData != "") {
+                        binding.editLinkCount.text = "1"
+                        binding.editLinkEt.text = args.getEditData
+                    }
+                }
+                "이름" -> binding.editNameEt.text = args.getEditData
+                "닉네임" -> binding.editNickNameEt.text = args.getEditData
+                "소개" -> binding.editIntroduceEt.text = args.getEditData
+            }
+        }
+
     }
 
     override fun onGetProFileMyDataFailure(message: String) {
@@ -136,14 +136,16 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
     }
 
     override fun onPatchProFileSuccess(response: ProFileEditResponse) {
-        dismissLoadingDialog()
+        binding.loadingCheck.utilLoadingCheck.visibility = View.GONE
         showCustomToast("수정 되었습니다.")
-        val fragmentManager : FragmentManager = requireActivity().supportFragmentManager
-        fragmentManager.beginTransaction().remove(this).commit()
-        fragmentManager.popBackStack()
+        val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProfileFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
 
     override fun onPatchProFileFailure(message: String) {
-        dismissLoadingDialog()
+        binding.loadingCheck.utilLoadingCheck.visibility = View.GONE
+        showCustomToast("오류! 수정이 불가합니다.")
+        val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProfileFragment()
+        Navigation.findNavController(requireView()).navigate(action)
     }
 }

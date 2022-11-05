@@ -47,6 +47,10 @@
         app:layout_constraintBottom_toBottomOf="@id/home_title_iv"
         app:layout_constraintEnd_toStartOf="@id/home_go_alarm_iv"/>
 
+
+
+
+
     <View
         android:id="@+id/home_scroll_divider"
         android:layout_width="match_parent"
@@ -69,6 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/home_scroll_divider"
         android:clipToPadding="false"
         android:paddingBottom="60dp"/>
+
 
 
 

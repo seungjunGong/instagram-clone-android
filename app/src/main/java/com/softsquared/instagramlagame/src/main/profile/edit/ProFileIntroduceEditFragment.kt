@@ -26,12 +26,10 @@ class ProFileIntroduceEditFragment : BaseFragment<FragmentProfileIntroduceEditBi
             Navigation.findNavController(requireView()).navigate(action)
         }
 
-        binding.profileIntroduceEt.text = args.getEditData
+        binding.profileIntroduceEt.setText(args.getEditIntroduce)
 
         binding.profileEditCloseBt.setOnClickListener {
-            val fragmentManager : FragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().remove(this).commit()
-            fragmentManager.popBackStack()
+            Navigation.findNavController(it).navigateUp()
         }
     }
 }
