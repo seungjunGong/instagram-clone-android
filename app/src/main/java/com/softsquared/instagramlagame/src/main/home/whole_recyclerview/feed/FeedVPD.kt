@@ -1,4 +1,4 @@
-package com.softsquared.instagramlagame.src.main.home.whole_recyclerview
+package com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,14 +19,14 @@ class FeedVPD(private val feedImageList : ArrayList<String>) : RecyclerView.Adap
     }
 
     // item xml 을 받아와 홀더를 만들어준다.
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedVPD.PagerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
         val binding: FeedVpItemBinding = FeedVpItemBinding .inflate(LayoutInflater.from(parent.context), parent, false)
 
         return PagerViewHolder(binding)
     }
 
     // 바인딩한 데이터를 홀더에 넣어준다.
-    override fun onBindViewHolder(holder: FeedVPD.PagerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
         holder.bind(feedImageList[position])
     }
 

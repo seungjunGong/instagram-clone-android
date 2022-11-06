@@ -1,8 +1,6 @@
 package com.softsquared.instagramlagame.config
 
 
-import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
@@ -27,6 +25,7 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
     lateinit var mLoginAlertDialog: LoginAlertDialog
     lateinit var mLoadingMainDialog: LoadingMainDialog
 
+
     // 뷰 바인딩 객체를 받아서 inflate해서 화면을 만들어줌.
     // 즉 매번 onCreate에서 setContentView를 하지 않아도 됨.
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +45,12 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
                 decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
         }
+        applyColors()
 
+    }
+    // Apply the title/navigation bar color
+    private fun applyColors() {
+        window.navigationBarColor = Color.parseColor("#FFFFFF")
     }
 
 
@@ -100,4 +104,6 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
     fun showCustomToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+
 }

@@ -94,9 +94,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 else -> ivTab.setImageResource(R.drawable.ic_profile_tab_tag)
             }
         }
-
-
-
         return view
     }
 

@@ -1,13 +1,11 @@
-package com.softsquared.instagramlagame.src.main.home
+package com.softsquared.instagramlagame.src.main.home.post
 
-import android.util.SparseArray
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.softsquared.instagramlagame.src.main.home.post.PostFragment
+import androidx.viewpager2.adapter.FragmentViewHolder
 
-
-class HomeVPAdapter(fragmentActivity: FragmentActivity) :FragmentStateAdapter(fragmentActivity) {
+class PostTabVPAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
     private var listType: List<Int> = listOf(0, 1)
 
@@ -18,10 +16,9 @@ class HomeVPAdapter(fragmentActivity: FragmentActivity) :FragmentStateAdapter(fr
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> {
-                PostFragment()}
-            else -> {
-                HomeFragment()
+                PostPostingFragment()
             }
+            else -> PostStoryFragment()
         }
     }
 

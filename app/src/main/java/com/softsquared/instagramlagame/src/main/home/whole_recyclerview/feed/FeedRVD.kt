@@ -1,6 +1,5 @@
-package com.softsquared.instagramlagame.src.main.home.whole_recyclerview
+package com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed
 
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,20 +8,24 @@ import androidx.viewpager2.widget.ViewPager2
 import com.softsquared.instagramlagame.databinding.FeedEmptyBinding
 import com.softsquared.instagramlagame.databinding.FeedItemBinding
 import com.softsquared.instagramlagame.databinding.HomeStoryBinding
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedResult
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.StoryData
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.StoryRVD
 
-class FeedRVD (private val feedData: ArrayList<FeedData>, private val storyData: ArrayList<StoryData>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class FeedRVD (private val feedData: ArrayList<FeedResult?>, private val storyData: ArrayList<StoryData>, private val pages: Int): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private val HEADER = 0 // 헤더 뷰
     private val ITEM = 1 // 리사이클러 피드 아이템 뷰
     private val EMPTY = 2 // 데이터가 없을 때 뜨는 뷰
+    private var filteredList = feedData
 
     override fun getItemViewType(position: Int): Int {
-        return if (feedData.size != 0) {
-            if (position == 0) HEADER else ITEM
-        } else {
+        return if (position == 0) {
+            HEADER
+        } else if (filteredList?.get(position) == null){
             EMPTY
+        } else{
+            ITEM
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -57,6 +60,10 @@ class FeedRVD (private val feedData: ArrayList<FeedData>, private val storyData:
         }
     }
 
+    fun updateItem(list:ArrayList<FeedResult?>){
+        this.filteredList = list
+    }
+
     override fun getItemCount(): Int {
         return if (feedData.size == 0) 1 else feedData.size + 1
     }
@@ -72,7 +79,7 @@ class FeedRVD (private val feedData: ArrayList<FeedData>, private val storyData:
             }
             // ITEM
             is ItemViewHolder -> {
-                holder.bind(feedData[position-1])
+                holder.bind(feedData[position-1]!!)
             }
             is EmptyViewHolder -> {}
         }
@@ -89,7 +96,8 @@ class FeedRVD (private val feedData: ArrayList<FeedData>, private val storyData:
     // 피드 항목에 해당하는 뷰객체 가지는 뷰홀더
     inner class ItemViewHolder(private val binding: FeedItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-            fun bind(data: FeedData){
+            fun bind(data: FeedResult){
+                data.postId
                 // 피드 뷰페이저 연결
                 val result = getFeedImageList()
                 val feedVPD = FeedVPD(result)

@@ -7,6 +7,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".src.main.home.HomeVpControllerFragment">
 
+
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/home_vp_controller"
         android:orientation="horizontal"
