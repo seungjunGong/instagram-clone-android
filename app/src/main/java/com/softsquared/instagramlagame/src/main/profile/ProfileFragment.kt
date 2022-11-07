@@ -10,10 +10,13 @@ import android.view.MotionEvent
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.Navigation
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
@@ -21,6 +24,7 @@ import com.softsquared.instagramlagame.databinding.FragmentProfileBinding
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
 import com.softsquared.instagramlagame.src.main.profile.models.ResultProFileMyData
 import com.softsquared.instagramlagame.src.signup.birthday.BirthDayFragmentDirections
+import com.softsquared.instagramlagame.util.ProfileBottomSheet
 import kotlinx.coroutines.NonDisposableHandle.parent
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::bind, R.layout.fragment_profile),
@@ -75,7 +79,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 true
             }
         }
+        // 설정
+        binding.profilePopUpMenu.setOnClickListener {
+            val bottomSheet = ProfileBottomSheet(requireContext())
+            // bottomSheetDialog 호출
+            bottomSheet.show()
+        }
     }
+
     // 탭 레이아웃 커스텀
     private fun getTabView(position: Int): View {
         val inflater = requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

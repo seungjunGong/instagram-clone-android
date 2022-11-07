@@ -9,14 +9,15 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/feed_profile_iv"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="@dimen/basic_margin_top"
-        android:background="@android:color/transparent"
+        android:background="@drawable/insta_border"
+        android:padding="3dp"
         app:civ_border_overlay="true"
-        app:civ_border_width="1dp"
-        app:civ_border_color="@color/basic_profile_border_line"
+        app:civ_border_width="0dp"
+        app:civ_border_color="@color/white"
         android:src="@drawable/ic_basic_profile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -66,6 +67,7 @@
         android:id="@+id/feed_page_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="@dimen/basic_margin_side"
         app:chipSurfaceColor="@color/translucent_black"
@@ -84,6 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:visibility="gone"
         app:dot_activeColor="@color/basic_sky_blue"
         app:dot_activeSize="6dp"
         app:dot_inactiveColor="@color/bright_gray"
@@ -96,25 +99,27 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 
-
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/feed_like_bt"
-        android:layout_width="@dimen/basic_icon_size"
-        android:layout_height="@dimen/basic_icon_size"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="@dimen/basic_margin_side"
-        android:src="@drawable/ic_like"
-        android:scaleType="fitXY"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/feed_vp_container"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="7dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="@id/feed_go_comment_bt"
+        app:layout_constraintBottom_toBottomOf="@id/feed_go_comment_bt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:lottie_fileName="heart.json"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="false"
+        />
+
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/feed_go_comment_bt"
         android:layout_width="@dimen/basic_icon_size"
         android:layout_height="@dimen/basic_icon_size"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="@dimen/basic_margin_side"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="9dp"
         android:src="@drawable/ic_comment"
         android:scaleType="fitXY"
         android:background="@android:color/transparent"
@@ -125,7 +130,7 @@
         android:id="@+id/feed_send_message_bt"
         android:layout_width="@dimen/basic_icon_size"
         android:layout_height="@dimen/basic_icon_size"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="@dimen/basic_margin_side"
         android:src="@drawable/ic_share"
         android:scaleType="fitXY"
@@ -137,7 +142,7 @@
         android:id="@+id/feed_collection_bt"
         android:layout_width="20dp"
         android:layout_height="@dimen/basic_icon_size"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="@dimen/basic_margin_side"
         android:src="@drawable/ic_bookmark"
         android:scaleType="fitXY"
@@ -149,13 +154,14 @@
         android:id="@+id/feed_like_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="@dimen/basic_margin_side"
         android:text="@string/home_like_count_before"
         android:textColor="@color/black"
         android:textSize="@dimen/feed_text_size"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/feed_like_bt"
-        app:layout_constraintStart_toStartOf="@id/feed_like_bt"/>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/feed_like_count_tv"

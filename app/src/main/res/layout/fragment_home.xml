@@ -74,6 +74,12 @@
         android:clipToPadding="false"
         android:paddingBottom="60dp"/>
 
+    <include
+        android:id="@+id/profile_loading"
+        layout="@layout/dialog_main_loading"
+        android:visibility="gone"/>
+
+
 
 
 

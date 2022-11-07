@@ -58,15 +58,12 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
 
         // close
         binding.postStoryClose.setOnClickListener {
-
+            val action = PostFragmentDirections.actionPostFragmentToHomeFragment()
+            Navigation.findNavController(requireActivity(), R.id.home_vp_controller).navigate(action)
         }
 
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        Log.d("PostStoryFragment", "onAttach")
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

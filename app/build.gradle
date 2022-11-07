@@ -10,7 +10,7 @@ android {
     compileSdk 32
 
     viewBinding {
-        enabled = true
+        enabled true
     }
 
     defaultConfig {
@@ -109,6 +109,9 @@ dependencies {
 
     // https://github.com/wasabeef/glide-transformations
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
+
+    // lottie
+    implementation "com.airbnb.android:lottie:5.2.0"
 
 
 }

@@ -4,7 +4,7 @@ package com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.mo
 import com.google.gson.annotations.SerializedName
 import com.softsquared.instagramlagame.config.BaseResponse
 
-data class HomeFeedResponse(
+data class FeedLikeResponse(
     @SerializedName("result")
-    val result: ResultFeedPage
+    val result: String
 ) : BaseResponse()

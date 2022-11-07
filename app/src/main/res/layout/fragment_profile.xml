@@ -94,7 +94,7 @@
                         android:background="@android:color/transparent"
                         app:civ_border_overlay="true"
                         app:civ_border_width="1dp"
-                        app:civ_border_color="@color/basic_profile_border_line"
+                        app:civ_border_color="@color/white"
                         android:src="@drawable/ic_basic_profile"
                         android:layout_gravity="center"
                         android:layout_marginEnd="20dp"
@@ -208,6 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="14sp"/>
 
@@ -217,7 +218,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/basic_dark_blue"
-
+                    android:visibility="gone"
                     android:textSize="@dimen/profile_text_size"
                     />
 

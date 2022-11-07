@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.system.Os.bind
+import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.IdRes
@@ -41,5 +42,7 @@ class PostFragment : BaseFragment<FragmentPostBinding>(FragmentPostBinding::bind
         binding.postContainer.setCurrentItem(1,false)
 
     }
+
+
 
 }

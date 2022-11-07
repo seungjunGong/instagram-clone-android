@@ -16,7 +16,9 @@ import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentHomeVpControllerBinding
 import com.softsquared.instagramlagame.src.main.MainActivity
+import com.softsquared.instagramlagame.src.main.home.post.PostFragment
 import com.softsquared.instagramlagame.src.main.home.post.PostFragmentDirections
+import com.softsquared.instagramlagame.src.main.home.post.PostStoryFragment
 
 
 class HomeVpControllerFragment : BaseFragment<FragmentHomeVpControllerBinding>(FragmentHomeVpControllerBinding::bind, R.layout.fragment_home_vp_controller){
@@ -58,6 +60,9 @@ class HomeVpControllerFragment : BaseFragment<FragmentHomeVpControllerBinding>(F
 
     }
 
+
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -90,6 +95,7 @@ class HomeVpControllerFragment : BaseFragment<FragmentHomeVpControllerBinding>(F
         requireActivity().window.statusBarColor = Color.parseColor("#000000");
         requireActivity().window.navigationBarColor = Color.parseColor("#000000");
     }
+
 
 
 }
