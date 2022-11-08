@@ -2,6 +2,8 @@ package com.softsquared.instagramlagame.src.main.profile
 
 import android.content.Context
 import android.content.Context.LAYOUT_INFLATER_SERVICE
+import android.content.SharedPreferences
+import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.system.Os.bind
@@ -9,23 +11,28 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import com.softsquared.instagramlagame.R
+import com.softsquared.instagramlagame.config.ApplicationClass
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentProfileBinding
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
-import com.softsquared.instagramlagame.src.main.profile.models.ResultProFileMyData
+import com.softsquared.instagramlagame.src.main.profile.tab.ProFileTabRVAdapter
+import com.softsquared.instagramlagame.src.main.user_thum.UserThumInterface
+import com.softsquared.instagramlagame.src.main.user_thum.models.UserThumResponse
 import com.softsquared.instagramlagame.src.signup.birthday.BirthDayFragmentDirections
-import com.softsquared.instagramlagame.util.ProfileBottomSheet
-import kotlinx.coroutines.NonDisposableHandle.parent
+import com.softsquared.instagramlagame.util.GridSpacingItemDecoration
+
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::bind, R.layout.fragment_profile),
         ProFileFragmentInterface{
@@ -35,6 +42,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     // 사람 찾아보기 토글
     private var showRecommendFollow = false
     private var myProFileUrl : String = ""
+    private var loading : Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,7 +51,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         binding.profileFollowFindLayout.visibility = View.GONE
 
         // 내 프로필 정보 받아오기
-        binding.profileLoading.mainLoading.visibility = View.VISIBLE
+        binding.profileLoading.loadingMainProgressBar.visibility = View.VISIBLE
         ProFileService(this).tryGetProFileMyData()
 
 
@@ -79,13 +87,31 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 true
             }
         }
+
         // 설정
         binding.profilePopUpMenu.setOnClickListener {
-            val bottomSheet = ProfileBottomSheet(requireContext())
+            // bottomSheetDialog 객체 생성
+            val bottomSheetDialog = BottomSheetDialog(
+                requireContext(), R.style.BottomSheetDialogTheme
+            )
+            // layout_bottom_sheet를 뷰 객체로 생성
+            // layout_bottom_sheet를 뷰 객체로 생성
+            val bottomSheetView = LayoutInflater.from(requireContext().applicationContext).inflate(
+                R.layout.layout_bottom_sheet, null)
+            // bottomSheetDialog의 dismiss 버튼 선택시 dialog disappear
+            bottomSheetView.findViewById<View>(R.id.setting_bottom_sheet_go_setting).setOnClickListener {
+                val action =    ProfileFragmentDirections.actionProfileFragmentToMySettingFragment(binding.profileNickName.text.toString())
+                Navigation.findNavController(requireView()).navigate(action)
+                bottomSheetDialog.dismiss()
+            }
+            // bottomSheetDialog 뷰 생성
+            bottomSheetDialog.setContentView(bottomSheetView)
             // bottomSheetDialog 호출
-            bottomSheet.show()
+            bottomSheetDialog.show()
         }
     }
+
+
 
     // 탭 레이아웃 커스텀
     private fun getTabView(position: Int): View {
@@ -109,7 +135,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     override fun onGetProFileMyDataSuccess(response: ProFileMyDataResponse) {
-        binding.profileLoading.mainLoading.visibility = View.GONE
+        if(!loading){
+            binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
+        }
         if(response.isSuccess){
             with(response.resultProFileMyData){
                 myProFileUrl = profileUrl
@@ -132,6 +160,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     profileFollowingCount.text = followingCount.toString()
                 }
             }
+            // userid 저장
+            val editor : SharedPreferences.Editor = ApplicationClass.sSharedPreferences.edit()
+            editor.putInt(ApplicationClass.USER_ID, response.resultProFileMyData.userId)
+            editor.apply()
         } else{
             showAlertDialog(requireContext(),"경고!","","","")
         }
@@ -139,8 +171,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     }
 
     override fun onGetProFileMyDataFailure(message: String) {
-        binding.profileLoading.mainLoading.visibility = View.GONE
+        if(!loading){
+            binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
+        }
         showAlertDialog(requireContext(),"경고!","","","")
     }
+
+
+
+
 
 }

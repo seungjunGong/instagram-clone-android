@@ -14,7 +14,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.softsquared.instagramlagame.R
-import com.softsquared.instagramlagame.databinding.FeedEmptyBinding
+import com.softsquared.instagramlagame.databinding.EmptyLoadingBinding
+
 import com.softsquared.instagramlagame.databinding.FeedItemBinding
 import com.softsquared.instagramlagame.databinding.HomeStoryBinding
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedResult
@@ -70,7 +71,7 @@ class FeedRVD (private val feedData: ArrayList<FeedResult>, private val storyDat
                 )
             EMPTY -> // EMPTY
                 EmptyViewHolder(
-                    FeedEmptyBinding.inflate(
+                    EmptyLoadingBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -219,7 +220,7 @@ class FeedRVD (private val feedData: ArrayList<FeedResult>, private val storyDat
 
     }
     // 데이터가 없을 때 보여줄 부분에 해당하는 뷰객체 가지는 뷰홀더
-    inner class EmptyViewHolder(val binding: FeedEmptyBinding) :
+    inner class EmptyViewHolder(val binding: EmptyLoadingBinding) :
         RecyclerView.ViewHolder(binding.root) {
             fun bind(){
 

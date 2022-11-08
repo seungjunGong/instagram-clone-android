@@ -45,7 +45,9 @@
             android:id="@+id/navToProFileEditFragment"
             app:destination="@id/proFileEditFragment">
         </action>
-
+        <action
+            android:id="@+id/action_profileFragment_to_mySettingFragment"
+            app:destination="@id/mySettingFragment" />
 
 
     </fragment>
@@ -164,6 +166,20 @@
         <action
             android:id="@+id/action_postFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mySettingFragment"
+        android:name="com.softsquared.instagramlagame.src.main.profile.MySettingFragment"
+        android:label="fragment_my_setting"
+        tools:layout="@layout/fragment_my_setting" >
+        <action
+            android:id="@+id/action_mySettingFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+
+        <argument
+            android:name="userNicName"
+            app:argType="string" />
+
     </fragment>
 
 

@@ -3,14 +3,22 @@ package com.softsquared.instagramlagame.src.main.profile.tab
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
 import com.softsquared.instagramlagame.R
+import com.softsquared.instagramlagame.config.ApplicationClass
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentProfileTabItemBinding
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileCompleteResponse
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileCompleteViewData
+import com.softsquared.instagramlagame.src.main.search.SearchRVAdapter
+import com.softsquared.instagramlagame.src.main.user_thum.UserThumInterface
+import com.softsquared.instagramlagame.src.main.user_thum.UserThumService
+import com.softsquared.instagramlagame.src.main.user_thum.models.GetUserThumRequest
+import com.softsquared.instagramlagame.src.main.user_thum.models.UserThumResponse
+import com.softsquared.instagramlagame.util.GridSpacingItemDecoration
 
 
-class ProFileTabFragment(type : String) : BaseFragment<FragmentProfileTabItemBinding>(FragmentProfileTabItemBinding::bind, com.softsquared.instagramlagame.R.layout.fragment_profile_tab_item),
+class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabItemBinding>(FragmentProfileTabItemBinding::bind, com.softsquared.instagramlagame.R.layout.fragment_profile_tab_item),
         ProfileTabFragmentInterface{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -18,6 +26,7 @@ class ProFileTabFragment(type : String) : BaseFragment<FragmentProfileTabItemBin
 
 
         ProFileTabService(this).tryGetProFileComplete()
+
 
     }
 
@@ -56,19 +65,26 @@ class ProFileTabFragment(type : String) : BaseFragment<FragmentProfileTabItemBin
                 // 프로필 완성 레이아웃
                 val recyclerViewAdapter = ProFileCompleteRVD(viewData, requireContext())
                 binding.profileCompleteRv.adapter = recyclerViewAdapter
+
+                when(type){
+                    "post" -> {
+                        val id = ApplicationClass.sSharedPreferences.getInt(ApplicationClass.USER_ID, -1)
+                        val data = GetUserThumRequest(myProfile = "Y", page = 0, userId =  id)
+
+                    }
+                }
             } else{
                 binding.profileVpCompleteProfile.visibility = View.GONE
             }
         }
-
-
-
-
     }
 
     override fun onGetProFileCompleteFailure(message: String) {
 
     }
+
+    // 유저 썸네일 받아오기
+
 
 
 }

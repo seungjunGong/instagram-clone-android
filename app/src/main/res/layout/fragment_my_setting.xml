@@ -5,9 +5,9 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     android:orientation="vertical"
-    android:id="@+id/birthdayFragment"
+    android:id="@+id/mySettingFragment"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".src.signup.birthday.BirthDayFragment">
+    tools:context=".src.main.profile.MySettingFragment">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import androidx.core.content.ContextCompat.startActivity
+import com.softsquared.instagramlagame.config.ApplicationClass
 import com.softsquared.instagramlagame.databinding.DialogAlertBinding
 import com.softsquared.instagramlagame.src.login.LoginActivity
 
@@ -39,7 +41,30 @@ class AlertDialog(context: Context, private val activity: Activity, private val 
                 activity.startActivity(intent)
             }, 3000) //3초 후 실행
 
-        } else{
+        } else if(topBt == "로그아웃"){
+            binding.alertTitle.text = title
+            binding.alertContent.text = content
+            binding.alertTopBt.text = topBt
+            binding.alertBottomBt.text = bottomBt
+            binding.alertTopBt.setOnClickListener {
+                // 로그아웃
+
+                // jwt 토큰 초기환
+                val editor : SharedPreferences.Editor = ApplicationClass.sSharedPreferences.edit()
+                editor.putString(ApplicationClass.X_ACCESS_TOKEN, null)
+                editor.apply()
+
+
+                val intent = Intent(context, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                activity.startActivity(intent)
+            }
+            binding.alertBottomBt.setOnClickListener {
+                dismiss()
+            }
+        }
+
+        else{
             binding.alertContent.text = content
             binding.alertTopBt.text = topBt
             binding.alertBottomBt.text = bottomBt

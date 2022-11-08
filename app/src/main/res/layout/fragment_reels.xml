@@ -7,14 +7,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".src.main.reels.ReelsFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reels_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/reels_item"
+        app:fastScrollEnabled="false"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="릴스프레그먼트"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="릴스"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/profile_title_size"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/basic_margin_side"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_white_camera"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="@dimen/basic_margin_side"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

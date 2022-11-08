@@ -27,7 +27,7 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
         super.onViewCreated(view, savedInstanceState)
 
         // 내 프로필 정보 받아오기
-        binding.profileLoading.mainLoading.visibility = View.VISIBLE
+        binding.profileLoading.loadingMainProgressBar.visibility = View.VISIBLE
         ProFileService(this).tryGetProFileMyData()
 
 
@@ -87,7 +87,7 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
     }
 
     override fun onGetProFileMyDataSuccess(response: ProFileMyDataResponse) {
-        binding.profileLoading.mainLoading.visibility = View.GONE
+        binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
         if(response.isSuccess){
             with(response.resultProFileMyData){
                 if(profileUrl != ""){
@@ -131,7 +131,7 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
     }
 
     override fun onGetProFileMyDataFailure(message: String) {
-        binding.profileLoading.mainLoading.visibility = View.GONE
+        binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
         showAlertDialog(requireContext(),"경고!","","","")
     }
 

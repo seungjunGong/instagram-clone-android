@@ -10,6 +10,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        applyColors()
+        applyWhiteColors()
 
         // 상태바 글씨 보이는 채로 투명
         window.apply {
@@ -96,18 +98,52 @@ class MainActivity : AppCompatActivity() {
                         override fun onLoadCleared(placeholder: Drawable?) {}
                     })
             }
+            if(destination.id == R.id.reelsFragment) {
+                binding.mainBttnav.setBackgroundColor(Color.parseColor("#000000"))
+                applyBlackColors()
+                setReelsIcons()
+            } else{
+                binding.mainBttnav.setBackgroundColor(Color.parseColor("#ffffff"))
+                applyWhiteColors()
+                setReelsOffIcons()
+            }
         }
 
 
 
     }
 
+    private fun setReelsIcons(){
+        with(binding.mainBttnav.menu){
+
+            getItem(0).icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_white_home)
+            getItem(1).icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_white_search)
+            getItem(3).icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_white_shopping)
+        }
+    }
+
+    private fun setReelsOffIcons(){
+        with(binding.mainBttnav.menu){
+
+            getItem(0).icon =  ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_bttnav_home)
+            getItem(1).icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_bttnav_search)
+            getItem(3).icon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_bttnav_shopping)
+        }
+    }
+
+
 
 
 
     // Apply the title/navigation bar color
-    private fun applyColors() {
+    private fun applyWhiteColors() {
+        window.statusBarColor = Color.parseColor("#FFFFFF")
         window.navigationBarColor = Color.parseColor("#FFFFFF")
+    }
+
+    private fun applyBlackColors() {
+        window.statusBarColor = Color.parseColor("#000000")
+        window.navigationBarColor = Color.parseColor("#000000")
     }
 
 

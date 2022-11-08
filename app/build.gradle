@@ -113,5 +113,14 @@ dependencies {
     // lottie
     implementation "com.airbnb.android:lottie:5.2.0"
 
+    // ExoPlayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.13.3'
+
+    // master exoplayer
+    implementation 'com.github.pankaj89:MasterExoPlayer:1.4.5'
+
+    // simpleAdapter
+    implementation 'com.github.pankaj89:SimpleAdapter:3.4.1'
+
 
 }

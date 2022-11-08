@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.softsquared.instagramlagame.R
+import com.softsquared.instagramlagame.config.ApplicationClass.Companion.USER_ID
 import com.softsquared.instagramlagame.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.softsquared.instagramlagame.config.ApplicationClass.Companion.sSharedPreferences
 import com.softsquared.instagramlagame.config.BaseActivity
@@ -158,6 +159,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             // jwt 토큰 저장
             val editor : SharedPreferences.Editor = sSharedPreferences.edit()
             editor.putString(X_ACCESS_TOKEN, response.resultLogin.jwt)
+            editor.putInt(USER_ID, response.resultLogin.userIdx)
             editor.apply()
 
             startActivity(Intent(this,MainActivity::class.java))

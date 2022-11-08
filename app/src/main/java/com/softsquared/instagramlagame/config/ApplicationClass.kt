@@ -26,6 +26,9 @@ class ApplicationClass : Application() {
         // JWT Token Header 키 값
         val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
 
+        // user Id 값
+        val USER_ID = "USER_ID"
+
         // Retrofit 인스턴스, 앱 실행시 한번만 생성하여 사용합니다.
         lateinit var sRetrofit: Retrofit
     }

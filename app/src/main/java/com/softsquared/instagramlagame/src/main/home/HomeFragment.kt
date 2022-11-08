@@ -1,12 +1,14 @@
 package com.softsquared.instagramlagame.src.main.home
 
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.softsquared.instagramlagame.R
+import com.softsquared.instagramlagame.config.ApplicationClass
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentHomeBinding
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.FeedRVD
@@ -14,11 +16,13 @@ import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.mod
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedResult
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.HomeFeedResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.StoryData
+import com.softsquared.instagramlagame.src.main.profile.ProFileFragmentInterface
+import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
 
 
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
-    HomeFragmentInterface {
+    HomeFragmentInterface, ProFileFragmentInterface {
 
     private var feedData = ArrayList<FeedResult>()
     private var  storyData = ArrayList<StoryData>()
@@ -31,7 +35,7 @@ class HomeFragment :
         super.onViewCreated(view, savedInstanceState)
 
         // 홈화면 정보 받기
-        binding.profileLoading.mainLoading.visibility = View.VISIBLE
+        binding.profileLoading.loadingMainProgressBar.visibility = View.VISIBLE
         HomeService(this).tryGetFeed(pageNumber)
 
         binding.homeRcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -85,7 +89,7 @@ class HomeFragment :
 
         Log.d("HomeFragment", "$response")
         if (response.code == 1000) {
-            binding.profileLoading.mainLoading.visibility = View.GONE
+            binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
 
             if (isLoading) {
                 feedData.removeAt(feedData.size - 1)
@@ -130,7 +134,7 @@ class HomeFragment :
 
 
     override fun onGetFeedFailure(message: String) {
-        binding.profileLoading.mainLoading.visibility = View.GONE
+        binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
     }
 
     override fun onPostFeedLikeSuccess(response: FeedLikeResponse) {
@@ -146,6 +150,21 @@ class HomeFragment :
     }
 
     override fun onPatchFeedLikeFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetProFileMyDataSuccess(response: ProFileMyDataResponse) {
+
+        // 유저 id 저장
+        val editor : SharedPreferences.Editor = ApplicationClass.sSharedPreferences.edit()
+        editor.putInt(ApplicationClass.USER_ID, response.resultProFileMyData.userId)
+        editor.apply()
+
+        // 유저 아이디 스토리 데이터 넣어 줄 떄 사용
+        response.resultProFileMyData.profileUrl
+    }
+
+    override fun onGetProFileMyDataFailure(message: String) {
         TODO("Not yet implemented")
     }
 }
