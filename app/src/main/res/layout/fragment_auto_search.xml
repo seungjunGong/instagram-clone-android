@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/autoSearchFragment"
+    tools:context=".src.main.search.auto_search.AutoSearchFragment">
+
+    <ImageView
+        android:id="@+id/auto_search_back_bt"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_balck_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"/>
+    <EditText
+        android:id="@+id/auto_search_et"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:background="@drawable/bright_gray_style"
+        android:hint="검색"
+        android:inputType="text"
+        android:layout_marginStart="15dp"
+        android:paddingStart="14dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/basic_gray"
+        android:textCursorDrawable="@color/black"
+        android:textSize="16sp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toTopOf="@id/auto_search_back_bt"
+        app:layout_constraintBottom_toBottomOf="@id/auto_search_back_bt"
+        app:layout_constraintStart_toEndOf="@id/auto_search_back_bt"
+        app:layout_constraintEnd_toEndOf="parent"
+      />
+
+    <ImageView
+        android:id="@+id/auto_search_close_bt"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_close"
+        app:layout_constraintTop_toTopOf="@id/auto_search_et"
+        app:layout_constraintBottom_toBottomOf="@id/auto_search_et"
+        app:layout_constraintEnd_toEndOf="@id/auto_search_et"
+        android:layout_marginEnd="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/auto_search_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_serch"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/auto_search_et"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"/>
+
+    <TextView
+        android:id="@+id/auto_search_all_result_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="결과 모두 보기"
+        android:visibility="gone"
+        android:textColor="@color/basic_sky_blue"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/auto_search_rcv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"/>
+
+    <LinearLayout
+        android:id="@+id/auto_search_loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/auto_search_all_result_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
+
+        <ProgressBar
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:indeterminate="false"
+            android:indeterminateDrawable="@anim/progress_lotate"/>
+
+        <TextView
+            android:id="@+id/auto_search_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ㅎㅎ 검색 중..."
+            android:textColor="@color/basic_gray"
+            android:textSize="14sp"
+            android:layout_marginStart="15dp"/>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

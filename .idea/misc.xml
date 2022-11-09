@@ -47,11 +47,13 @@
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/dialog_alert.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/dialog_loading.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/dialog_main_loading.xml" value="0.30012825994014536" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/empty_loading.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/feed_empty.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/feed_item.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/feed_vp_item.xml" value="0.365625" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragement_home_vp_controller.xml" value="0.30012825994014536" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_agreement.xml" value="0.365625" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_auto_search.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_birthday.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_feed_like.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
@@ -89,6 +91,7 @@
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/home_story.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/home_story_header.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/home_story_item.xml" value="0.365625" />
+        <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/item_serch.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.30012825994014536" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/my_setting_fragment.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/Owner/Desktop/Downloads/InstagramLagame/app/src/main/res/layout/profie_view_pager_item.xml" value="0.3333333333333333" />

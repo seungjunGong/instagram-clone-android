@@ -162,11 +162,6 @@ class FeedRVD(
                     animator.start()
                     isLike = true
                 } else {
-                    val animator = ValueAnimator.ofFloat(0.5F, 1F).setDuration(500)
-                    animator.addUpdateListener { animation: ValueAnimator ->
-                        binding.feedLikeBt.progress = animation.animatedValue as Float
-                    }
-                    animator.start()
                     isLike = false
                 }
             }

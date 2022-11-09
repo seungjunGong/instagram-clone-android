@@ -30,10 +30,10 @@ class HomeFragment :
     HomeFragmentInterface {
 
     private var feedData = ArrayList<FeedResult>()
-    private var  storyData = ArrayList<ResultHomeStory>()
+    private var storyData = ArrayList<ResultHomeStory>()
     private var isLoading = false
     private var pageNumber = 0
-    private val homeRVD  = FeedRVD(feedData, storyData)
+    private val homeRVD = FeedRVD(feedData, storyData)
     private var feedLoading = false
     private var storyLoading = false
 
@@ -74,12 +74,12 @@ class HomeFragment :
             applyBlackColors()
         }
         // feed like 처리
-        homeRVD.setFeedLikeClickListener(object : FeedRVD.FeedClickListener{
+        homeRVD.setFeedLikeClickListener(object : FeedRVD.FeedClickListener {
             override fun onLikeClick(postId: Int, liked: Boolean) {
-                if(liked){
+                if (liked) {
                     HomeService(this@HomeFragment).tryPatchFeedLike(postId)
 
-                } else{
+                } else {
                     HomeService(this@HomeFragment).tryPostFeedLike(postId)
 
                 }
@@ -89,13 +89,9 @@ class HomeFragment :
     }
 
     fun moreItems() {
-
-
         pageNumber++
         HomeService(this).tryGetFeed(pageNumber)
     }
-
-
 
 
     override fun onGetFeedSuccess(response: HomeFeedResponse) {
@@ -125,7 +121,6 @@ class HomeFragment :
                 }
                 feedLoading = true
                 checkLoading()
-
             }
         } else {
             pageNumber = 0
@@ -133,24 +128,23 @@ class HomeFragment :
         }
     }
 
-    private fun checkLoading(){
-        if(feedLoading && storyLoading){
+    private fun checkLoading() {
+        if (feedLoading && storyLoading) {
             binding.homeRcv.adapter = homeRVD
         }
         binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
 
         // 유저 닉네임 클릭 리스너
-        homeRVD.setUserNickClickListener(object : FeedRVD.FeedUserNickClickListener{
+        homeRVD.setUserNickClickListener(object : FeedRVD.FeedUserNickClickListener {
             override fun onUserNickClick(userNick: String, userid: Int) {
                 // 데이터 전달
-                val action = HomeFragmentDirections.actionHomeFragmentToOthersProFileFragment(userNickName = userNick, userId =  userid)
+                val action = HomeFragmentDirections.actionHomeFragmentToOthersProFileFragment(
+                    userNickName = userNick,
+                    userId = userid)
                 Navigation.findNavController(requireView()).navigate(action)
-                hideBttnav()
             }
         })
     }
-
-
 
 
     override fun onGetFeedFailure(message: String) {
@@ -176,15 +170,15 @@ class HomeFragment :
     override fun onGetHomeStorySuccess(response: HomeStoryResponse) {
 
         Log.d("storyData", "$response")
-        with(response.resultHomeStory){
+        with(response.resultHomeStory) {
             storyData.apply {
-                for(result in this@with){
-                    if (result.visitCnt < result.storyDataList.size){
+                for (result in this@with) {
+                    if (result.visitCnt < result.storyDataList.size) {
                         add(result)
                     }
                 }
-                for (result in this@with){
-                    if (result.visitCnt > result.storyDataList.size){
+                for (result in this@with) {
+                    if (result.visitCnt > result.storyDataList.size) {
                         add(result)
                     }
                 }

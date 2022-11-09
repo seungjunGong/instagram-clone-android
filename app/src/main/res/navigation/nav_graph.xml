@@ -28,7 +28,11 @@
         android:id="@+id/searchFragment"
         android:name="com.softsquared.instagramlagame.src.main.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_autoSearchFragment"
+            app:destination="@id/autoSearchFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/reelsFragment"
@@ -255,6 +259,18 @@
         <argument
             android:name="pickedImage"
             app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/autoSearchFragment"
+        android:name="com.softsquared.instagramlagame.src.main.search.auto_search.AutoSearchFragment"
+        android:label="fragment_auto_search"
+        tools:layout="@layout/fragment_auto_search" >
+        <action
+            android:id="@+id/action_autoSearchFragment_to_othersProFileFragment"
+            app:destination="@id/othersProFileFragment"
+            app:enterAnim="@anim/slid_left"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
     </fragment>
 
 

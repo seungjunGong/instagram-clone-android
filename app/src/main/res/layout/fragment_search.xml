@@ -70,6 +70,11 @@
                 android:paddingBottom="60dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
 
+            <include
+                android:id="@+id/search_loading_progressBar"
+                android:visibility="gone"
+                layout="@layout/empty_loading"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 

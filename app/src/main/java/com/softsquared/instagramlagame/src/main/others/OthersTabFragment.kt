@@ -23,6 +23,7 @@ class OthersTabFragment(val type : String, val userId: Int) : BaseFragment<Fragm
         }
     }
 
+
     override fun onGetUserThumbnailSuccess(response: UserThumResponse) {
         if (response.resultUserThum.thumbnailList.isEmpty()) {
             binding.othersTabNoItem.visibility = View.VISIBLE

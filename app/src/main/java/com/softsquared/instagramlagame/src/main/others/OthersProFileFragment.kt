@@ -53,7 +53,6 @@ class OthersProFileFragment : BaseFragment<FragmentOthersProfileBinding>(Fragmen
         }
         binding.profileOthersBackBt.setOnClickListener {
             Navigation.findNavController(requireView()).navigateUp()
-            showBttnav()
         }
     }
 
@@ -65,7 +64,6 @@ class OthersProFileFragment : BaseFragment<FragmentOthersProfileBinding>(Fragmen
             override fun handleOnBackPressed() {
                 view?.let {
                     Navigation.findNavController(requireView()).navigateUp()
-                    showBttnav()
                 }
             }
         }
