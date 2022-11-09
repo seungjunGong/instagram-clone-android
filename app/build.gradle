@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.softsquared.instagramlagame"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -122,5 +122,12 @@ dependencies {
     // simpleAdapter
     implementation 'com.github.pankaj89:SimpleAdapter:3.4.1'
 
+    // firebase
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:31.0.2')
 
+    // Add the dependency for the Realtime Database library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 }

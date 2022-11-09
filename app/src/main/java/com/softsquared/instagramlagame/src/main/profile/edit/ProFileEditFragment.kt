@@ -1,8 +1,10 @@
 package com.softsquared.instagramlagame.src.main.profile.edit
 
+import android.content.Context
 import android.os.Bundle
 import android.system.Os.bind
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.Dimension
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentManager
@@ -34,6 +36,7 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
         // 현재 페이지 close
         binding.profileEditCloseBt.setOnClickListener {
             Navigation.findNavController(it).navigateUp()
+            showBttnav()
         }
 
         // 이름 수정
@@ -80,11 +83,23 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
                 binding.loadingCheck.utilLoadingCheck.visibility = View.VISIBLE
 
         }
-
-
-
-
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        // 백버튼 설정
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                view?.let {
+                    Navigation.findNavController(it).navigateUp()
+                    showBttnav()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
 
     override fun onGetProFileMyDataSuccess(response: ProFileMyDataResponse) {
         binding.profileLoading.loadingMainProgressBar.visibility = View.GONE

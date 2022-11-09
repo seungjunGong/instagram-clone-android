@@ -23,14 +23,9 @@ import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.softsquared.instagramlagame.R
-import com.softsquared.instagramlagame.config.BaseActivity
+
 import com.softsquared.instagramlagame.databinding.ActivityMainBinding
-import com.softsquared.instagramlagame.src.main.home.HomeVpControllerFragment
-import com.softsquared.instagramlagame.src.main.profile.ProfileFragment
-import com.softsquared.instagramlagame.src.main.reels.ReelsFragment
-import com.softsquared.instagramlagame.src.main.search.SearchFragment
-import com.softsquared.instagramlagame.src.main.shopping.ShoppingFragment
-import jp.wasabeef.glide.transformations.BlurTransformation
+
 import jp.wasabeef.glide.transformations.CropCircleWithBorderTransformation
 import jp.wasabeef.glide.transformations.internal.Utils
 

@@ -2,6 +2,7 @@ package com.softsquared.instagramlagame.src.main.home
 
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.HomeFeedResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedLikeResponse
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.HomeStoryResponse
 
 interface HomeFragmentInterface {
 
@@ -16,4 +17,8 @@ interface HomeFragmentInterface {
     fun onPatchFeedLikeSuccess(response: FeedLikeResponse)
 
     fun onPatchFeedLikeFailure(message: String)
+
+    fun onGetHomeStorySuccess(response: HomeStoryResponse)
+
+    fun onGetHomeStoryFailure(message: String)
 }

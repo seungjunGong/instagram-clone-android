@@ -2,7 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/othersProfileFragment"
+    tools:context=".src.main.others.OthersProFileFragment">
 
     <TextView
         android:id="@+id/profile_others_nickName"
@@ -53,8 +56,10 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/profile_whole_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/profile_scroll_divider">
@@ -198,6 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     android:textSize="14sp"/>
 
@@ -206,6 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:visibility="gone"
                     android:textColor="@color/basic_dark_blue"
 
                     android:textSize="@dimen/profile_text_size"
@@ -224,7 +231,7 @@
                         android:textSize="16sp"
                         android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:gravity="center"
                         android:background="@drawable/blue_style" />
 
@@ -252,7 +259,7 @@
 
 
             <com.google.android.material.tabs.TabLayout
-                android:id="@+id/profile_tag_tabs"
+                android:id="@+id/others_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:tabMode="fixed"
@@ -275,7 +282,7 @@
 
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/profile_tab_vp"
+                android:id="@+id/others_tab_vp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

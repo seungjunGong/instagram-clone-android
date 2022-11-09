@@ -20,4 +20,6 @@
     <color name="red_emphasis">#E3242B</color>
     <color name="high_bright_gray">#EFEFEF</color>
     <color name="basic_green">#008000</color>
+    <color name="transparent_white">#80FFFFFF</color>
+    <color name="transparent">#FFFFFFFF</color>
 </resources>

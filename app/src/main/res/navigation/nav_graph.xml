@@ -3,19 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeVpControllerFragment">
+    app:startDestination="@id/homeFragment">
 
-    <fragment
-        android:id="@+id/homeVpControllerFragment"
-        android:name="com.softsquared.instagramlagame.src.main.home.HomeVpControllerFragment"
-        android:label="fragment_home_vp_controller"
-        tools:layout="@layout/fragment_home_vp_controller" />
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.softsquared.instagramlagame.src.main.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_othersProFileFragment"
+            app:destination="@id/othersProFileFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_postPostingFragment"
+            app:destination="@id/postPostingFragment"
+            app:enterAnim="@anim/slid_left"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/searchFragment"
@@ -159,15 +166,6 @@
             />
     </fragment>
     <fragment
-        android:id="@+id/postFragment"
-        android:name="com.softsquared.instagramlagame.src.main.home.post.PostFragment"
-        android:label="fragment_post"
-        tools:layout="@layout/fragment_post" >
-        <action
-            android:id="@+id/action_postFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/mySettingFragment"
         android:name="com.softsquared.instagramlagame.src.main.profile.MySettingFragment"
         android:label="fragment_my_setting"
@@ -180,6 +178,83 @@
             android:name="userNicName"
             app:argType="string" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/othersProFileFragment"
+        android:name="com.softsquared.instagramlagame.src.main.others.OthersProFileFragment"
+        android:label="fragment_others_profile"
+        tools:layout="@layout/fragment_others_profile" >
+        <action
+            android:id="@+id/action_othersProFileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+
+        <argument
+            android:name="userNickName"
+            app:argType="string"/>
+        <argument
+            app:argType="integer"
+            android:name="userId" />
+    </fragment>
+    <fragment
+        android:id="@+id/postPostingFragment"
+        android:name="com.softsquared.instagramlagame.src.main.home.post.PostPostingFragment"
+        android:label="fragment_post_posting"
+        tools:layout="@layout/fragment_post_posting" >
+        <action
+            android:id="@+id/action_postPostingFragment_to_postStoryFragment"
+            app:destination="@id/postStoryFragment"
+            app:enterAnim="@anim/slid_left"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/postStoryFragment"/>
+        <action
+            android:id="@+id/action_postPostingFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slid_left"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/homeFragment"/>
+        <action
+            android:id="@+id/action_postPostingFragment_to_uploadPostingFragment"
+            app:destination="@id/uploadPostingFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/postStoryFragment"
+        android:name="com.softsquared.instagramlagame.src.main.home.post.PostStoryFragment"
+        android:label="fragment_post_story"
+        tools:layout="@layout/fragment_post_story" >
+        <action
+            android:id="@+id/action_postStoryFragment_to_postPostingFragment"
+            app:destination="@id/postPostingFragment"
+            app:enterAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slid_left"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/postPostingFragment"/>
+        <action
+            android:id="@+id/action_postStoryFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slid_left"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/homeFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/uploadPostingFragment"
+        android:name="com.softsquared.instagramlagame.src.main.home.post.UploadPostingFragment"
+        android:label="fragment_upload_posting"
+        tools:layout="@layout/fragment_upload_posting" >
+        <action
+            android:id="@+id/action_uploadPostingFragment_to_postPostingFragment"
+            app:destination="@id/postPostingFragment" />
+
+        <argument
+            android:name="pickedImage"
+            app:argType="string"/>
     </fragment>
 
 

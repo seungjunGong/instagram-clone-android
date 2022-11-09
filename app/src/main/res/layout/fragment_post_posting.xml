@@ -32,7 +32,7 @@
         android:layout_marginStart="25dp"/>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/post_posting_back_bt"
+        android:id="@+id/post_posting_next_bt"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_sky_blue_right"
@@ -41,19 +41,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="15dp"/>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/post_posting_back_bt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="10dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_posting_next_bt"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:id="@+id/post_posting_select_iv"
@@ -109,14 +107,62 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/post_posting_rcv"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp"
+                tools:listitem="@layout/grid_item"
                 android:layout_marginTop="10dp" />
+
 
         </LinearLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/post_tabs"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/camera_tab_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/post_posting_next_bt">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="게시물"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/go_story"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="스토리"
+            android:gravity="center"
+            android:layout_marginStart="30dp"
+            android:textSize="14sp"
+            android:textColor="#80FFFFFF"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/black"/>
+
+
+
+
 
 
 

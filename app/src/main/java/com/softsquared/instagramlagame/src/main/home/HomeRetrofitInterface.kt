@@ -2,6 +2,7 @@ package com.softsquared.instagramlagame.src.main.home
 
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.HomeFeedResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedLikeResponse
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.HomeStoryResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.PATCH
@@ -19,4 +20,6 @@ interface HomeRetrofitInterface {
     @PATCH("/posts/like/{postId}")
     fun patchFeedLike(@Path("postId") postId: Int) : Call<FeedLikeResponse>
 
+    @GET("/storys/getList")
+    fun getHomeStory() : Call<HomeStoryResponse>
 }

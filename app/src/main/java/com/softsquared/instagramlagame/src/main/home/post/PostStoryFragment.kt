@@ -3,6 +3,7 @@ package com.softsquared.instagramlagame.src.main.home.post
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -23,8 +24,6 @@ import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentPostStoryBinding
 import com.softsquared.instagramlagame.src.main.MainActivity
-import com.softsquared.instagramlagame.src.main.home.HomeVpControllerFragment
-import com.softsquared.instagramlagame.src.signup.phone_email.PhoneEmailFragmentDirections
 import com.softsquared.instagramlagame.util.PermissionUtil
 import java.io.File
 import java.text.SimpleDateFormat
@@ -58,11 +57,33 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
 
         // close
         binding.postStoryClose.setOnClickListener {
-            val action = PostFragmentDirections.actionPostFragmentToHomeFragment()
-            Navigation.findNavController(requireActivity(), R.id.home_vp_controller).navigate(action)
+            requireActivity().onBackPressed()
+            applyWhiteColors()
         }
 
+        binding.goPosting.setOnClickListener {
+            val action = PostStoryFragmentDirections.actionPostStoryFragmentToPostPostingFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        }
+
+
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        // 백버튼 설정
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                view?.let {
+                    requireActivity().onBackPressed()
+                    applyWhiteColors()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

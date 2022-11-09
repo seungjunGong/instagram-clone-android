@@ -1,6 +1,7 @@
 package com.softsquared.instagramlagame.config
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.softsquared.instagramlagame.src.main.MainActivity
 import com.softsquared.instagramlagame.util.LoadingDialog
 import com.softsquared.instagramlagame.util.LoadingMainDialog
 
@@ -32,6 +34,27 @@ abstract class BaseFragment<B : ViewBinding>(
     ): View? {
         _binding = bind(super.onCreateView(inflater, container, savedInstanceState)!!)
         return binding.root
+    }
+
+    // Apply the title/navigation bar color
+    fun applyBlackColors() {
+        requireActivity().window.statusBarColor = Color.parseColor("#000000")
+        requireActivity().window.navigationBarColor = Color.parseColor("#000000")
+        (context as MainActivity).binding.mainBttnav.visibility = View.GONE
+    }
+
+    // Apply the title/navigation bar color
+    fun applyWhiteColors() {
+        requireActivity().window.statusBarColor = Color.parseColor("#FFFFFF")
+        requireActivity().window.navigationBarColor = Color.parseColor("#FFFFFF")
+        (context as MainActivity).binding.mainBttnav.visibility = View.VISIBLE
+    }
+    fun hideBttnav(){
+        (context as MainActivity).binding.mainBttnav.visibility = View.GONE
+    }
+
+    fun showBttnav(){
+        (context as MainActivity).binding.mainBttnav.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

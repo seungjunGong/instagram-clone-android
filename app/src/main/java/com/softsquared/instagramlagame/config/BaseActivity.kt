@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.softsquared.instagramlagame.src.main.MainActivity
 import com.softsquared.instagramlagame.util.LoadingDialog
 import com.softsquared.instagramlagame.util.LoadingMainDialog
 import com.softsquared.instagramlagame.util.LoginAlertDialog
@@ -45,13 +46,10 @@ abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflate
                 decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
         }
-        applyColors()
+        window.navigationBarColor = Color.parseColor("#FFFFFF")
 
     }
-    // Apply the title/navigation bar color
-    private fun applyColors() {
-        window.navigationBarColor = Color.parseColor("#FFFFFF")
-    }
+
 
 
     // 로딩 다이얼로그, 즉 로딩창을 띄워줌.

@@ -2,10 +2,15 @@ package com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.databinding.*
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.ResultHomeStory
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.StoryData
 
-class StoryRVD (private val storyData: ArrayList<StoryData>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StoryRVD (private val storyData: ArrayList<ResultHomeStory>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val HEADER = 0
     private val ITEM = 1
@@ -59,7 +64,17 @@ class StoryRVD (private val storyData: ArrayList<StoryData>): RecyclerView.Adapt
         }
     }
     inner class StoryItemViewHolder(val binding: HomeStoryItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(data: StoryData){
+        fun bind(data: ResultHomeStory){
+            binding.storyUserNickName.text = data.nickname
+            Glide.with(itemView)
+                .load(data.profileUrl)
+                .error("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/ic_profile.png?alt=media&token=0053a8f4-3cdf-44b7-8dbe-768ac4d4bba4")
+                .into(binding.storyProfileOtherIv)
+            if(data.storyDataList != null && data.visitCnt < 1){
+                binding.storyProfileOtherIv.background = ContextCompat.getDrawable(binding.storyProfileOtherIv.context, R.drawable.insta_border)
+            } else if(data.storyDataList != null && data.visitCnt > 0){
+                binding.storyProfileOtherIv.background = ContextCompat.getDrawable(binding.storyProfileOtherIv.context, R.drawable.insta_inactived_border)
+            }
 
         }
     }

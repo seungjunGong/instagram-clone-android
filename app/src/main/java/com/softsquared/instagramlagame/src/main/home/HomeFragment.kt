@@ -2,33 +2,40 @@ package com.softsquared.instagramlagame.src.main.home
 
 
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.ApplicationClass
+import com.softsquared.instagramlagame.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentHomeBinding
+import com.softsquared.instagramlagame.src.main.MainActivity
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.FeedRVD
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedLikeResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedResult
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.HomeFeedResponse
-import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.StoryData
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.HomeStoryResponse
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.ResultHomeStory
 import com.softsquared.instagramlagame.src.main.profile.ProFileFragmentInterface
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
 
 
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
-    HomeFragmentInterface, ProFileFragmentInterface {
+    HomeFragmentInterface {
 
     private var feedData = ArrayList<FeedResult>()
-    private var  storyData = ArrayList<StoryData>()
+    private var  storyData = ArrayList<ResultHomeStory>()
     private var isLoading = false
     private var pageNumber = 0
     private val homeRVD  = FeedRVD(feedData, storyData)
+    private var feedLoading = false
+    private var storyLoading = false
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +43,7 @@ class HomeFragment :
 
         // 홈화면 정보 받기
         binding.profileLoading.loadingMainProgressBar.visibility = View.VISIBLE
+        HomeService(this).tryGetHomeStory()
         HomeService(this).tryGetFeed(pageNumber)
 
         binding.homeRcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -59,6 +67,12 @@ class HomeFragment :
             }
         })
 
+        // 포스트 프레그먼트 이동
+        binding.homeGoUploadIv.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToPostPostingFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+            applyBlackColors()
+        }
         // feed like 처리
         homeRVD.setFeedLikeClickListener(object : FeedRVD.FeedClickListener{
             override fun onLikeClick(postId: Int, liked: Boolean) {
@@ -72,9 +86,6 @@ class HomeFragment :
             }
 
         })
-
-
-
     }
 
     fun moreItems() {
@@ -85,11 +96,12 @@ class HomeFragment :
     }
 
 
+
+
     override fun onGetFeedSuccess(response: HomeFeedResponse) {
 
         Log.d("HomeFragment", "$response")
-        if (response.code == 1000) {
-            binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
+        if (response.result.postList.isNotEmpty()) {
 
             if (isLoading) {
                 feedData.removeAt(feedData.size - 1)
@@ -111,26 +123,34 @@ class HomeFragment :
                         add(feedData)
                     }
                 }
+                feedLoading = true
+                checkLoading()
 
-                storyData.apply {
-                    add(StoryData(1))
-                    add(StoryData(1))
-                    add(StoryData(1))
-                    add(StoryData(1))
-                    add(StoryData(1))
-                    add(StoryData(1))
-                    add(StoryData(1))
-
-                    binding.homeRcv.adapter = homeRVD
-                }
             }
-
         } else {
+            pageNumber = 0
             HomeService(this).tryGetFeed(pageNumber)
         }
-
-
     }
+
+    private fun checkLoading(){
+        if(feedLoading && storyLoading){
+            binding.homeRcv.adapter = homeRVD
+        }
+        binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
+
+        // 유저 닉네임 클릭 리스너
+        homeRVD.setUserNickClickListener(object : FeedRVD.FeedUserNickClickListener{
+            override fun onUserNickClick(userNick: String, userid: Int) {
+                // 데이터 전달
+                val action = HomeFragmentDirections.actionHomeFragmentToOthersProFileFragment(userNickName = userNick, userId =  userid)
+                Navigation.findNavController(requireView()).navigate(action)
+                hideBttnav()
+            }
+        })
+    }
+
+
 
 
     override fun onGetFeedFailure(message: String) {
@@ -153,18 +173,34 @@ class HomeFragment :
         TODO("Not yet implemented")
     }
 
-    override fun onGetProFileMyDataSuccess(response: ProFileMyDataResponse) {
+    override fun onGetHomeStorySuccess(response: HomeStoryResponse) {
 
-        // 유저 id 저장
-        val editor : SharedPreferences.Editor = ApplicationClass.sSharedPreferences.edit()
-        editor.putInt(ApplicationClass.USER_ID, response.resultProFileMyData.userId)
-        editor.apply()
+        Log.d("storyData", "$response")
+        with(response.resultHomeStory){
+            storyData.apply {
+                for(result in this@with){
+                    if (result.visitCnt < result.storyDataList.size){
+                        add(result)
+                    }
+                }
+                for (result in this@with){
+                    if (result.visitCnt > result.storyDataList.size){
+                        add(result)
+                    }
+                }
+            }
 
-        // 유저 아이디 스토리 데이터 넣어 줄 떄 사용
-        response.resultProFileMyData.profileUrl
+            storyLoading = true
+            checkLoading()
+
+        }
+        Log.d("storyData", "$storyData")
+
     }
 
-    override fun onGetProFileMyDataFailure(message: String) {
+    override fun onGetHomeStoryFailure(message: String) {
         TODO("Not yet implemented")
     }
+
+
 }

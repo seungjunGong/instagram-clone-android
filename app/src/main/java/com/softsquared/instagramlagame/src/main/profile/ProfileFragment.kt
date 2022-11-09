@@ -70,6 +70,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             with(binding){
                 val action = ProfileFragmentDirections.navToProFileEditFragment()
                 Navigation.findNavController(requireView()).navigate(action)
+                hideBttnav()
             }
         }
 
@@ -98,16 +99,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             // layout_bottom_sheet를 뷰 객체로 생성
             val bottomSheetView = LayoutInflater.from(requireContext().applicationContext).inflate(
                 R.layout.layout_bottom_sheet, null)
+            // bottomSheetDialog 뷰 생성
+            bottomSheetDialog.setContentView(bottomSheetView)
+            // bottomSheetDialog 호출
+            bottomSheetDialog.show()
+
             // bottomSheetDialog의 dismiss 버튼 선택시 dialog disappear
             bottomSheetView.findViewById<View>(R.id.setting_bottom_sheet_go_setting).setOnClickListener {
                 val action =    ProfileFragmentDirections.actionProfileFragmentToMySettingFragment(binding.profileNickName.text.toString())
                 Navigation.findNavController(requireView()).navigate(action)
                 bottomSheetDialog.dismiss()
+                hideBttnav()
             }
-            // bottomSheetDialog 뷰 생성
-            bottomSheetDialog.setContentView(bottomSheetView)
-            // bottomSheetDialog 호출
-            bottomSheetDialog.show()
         }
     }
 
@@ -148,7 +151,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     binding.profileGoMyLinkTv.visibility = View.VISIBLE
                 }
                 if(profileUrl != ""){
-                    Glide.with(requireContext()).load(profileUrl).into(binding.profileImageIv)
+                    Glide.with(requireContext()).load(profileUrl).error("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/ic_profile.png?alt=media&token=0053a8f4-3cdf-44b7-8dbe-768ac4d4bba4").into(binding.profileImageIv)
                 }
                 with(binding){
                     profileUserNameTv.text = name

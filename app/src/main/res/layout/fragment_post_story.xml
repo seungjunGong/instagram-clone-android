@@ -13,7 +13,7 @@
         android:id="@+id/camera_preview_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp">
+        android:layout_marginBottom="110dp">
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -137,6 +137,43 @@
         android:layout_marginStart="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/camera_preview_frame"/>
+
+    <LinearLayout
+        android:id="@+id/post_tabs"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/camera_tab_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/go_posting"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="게시물"
+            android:gravity="center"
+            android:textColor="#80FFFFFF"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="스토리"
+            android:gravity="center"
+            android:layout_marginStart="30dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+
 
 
     <FrameLayout

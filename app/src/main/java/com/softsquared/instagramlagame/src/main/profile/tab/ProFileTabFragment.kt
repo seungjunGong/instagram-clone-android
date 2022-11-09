@@ -10,23 +10,29 @@ import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentProfileTabItemBinding
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileCompleteResponse
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileCompleteViewData
-import com.softsquared.instagramlagame.src.main.search.SearchRVAdapter
 import com.softsquared.instagramlagame.src.main.user_thum.UserThumInterface
 import com.softsquared.instagramlagame.src.main.user_thum.UserThumService
-import com.softsquared.instagramlagame.src.main.user_thum.models.GetUserThumRequest
 import com.softsquared.instagramlagame.src.main.user_thum.models.UserThumResponse
 import com.softsquared.instagramlagame.util.GridSpacingItemDecoration
 
 
 class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabItemBinding>(FragmentProfileTabItemBinding::bind, com.softsquared.instagramlagame.R.layout.fragment_profile_tab_item),
-        ProfileTabFragmentInterface{
+        ProfileTabFragmentInterface, UserThumInterface{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
         ProFileTabService(this).tryGetProFileComplete()
-
+        when(type){
+            "post" -> {
+                val id = ApplicationClass.sSharedPreferences.getInt(ApplicationClass.USER_ID, -1)
+                UserThumService(this).tryGetUserThumbNaill(id,0)
+            }
+            "tag" ->{
+                binding.profileTabZeroTagItem.visibility = View.VISIBLE
+            }
+        }
 
     }
 
@@ -66,13 +72,7 @@ class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabIte
                 val recyclerViewAdapter = ProFileCompleteRVD(viewData, requireContext())
                 binding.profileCompleteRv.adapter = recyclerViewAdapter
 
-                when(type){
-                    "post" -> {
-                        val id = ApplicationClass.sSharedPreferences.getInt(ApplicationClass.USER_ID, -1)
-                        val data = GetUserThumRequest(myProfile = "Y", page = 0, userId =  id)
 
-                    }
-                }
             } else{
                 binding.profileVpCompleteProfile.visibility = View.GONE
             }
@@ -81,6 +81,29 @@ class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabIte
 
     override fun onGetProFileCompleteFailure(message: String) {
 
+    }
+
+    override fun onGetUserThumbnailSuccess(response: UserThumResponse) {
+        if (response.resultUserThum.thumbnailList.isEmpty()) {
+            binding.profileTabZeroPostItem.visibility = View.VISIBLE
+        } else{
+            val spanCount = 3 // 3 columns
+
+            val spacing = 10 // 50px
+
+            val includeEdge = false
+            binding.profileTabRcv.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+            val layoutManager = GridLayoutManager(requireContext(), 3)
+
+            binding.profileTabRcv.setHasFixedSize(true)
+            binding.profileTabRcv.layoutManager = layoutManager
+            binding.profileTabRcv.adapter = ProFileTabRVAdapter(response.resultUserThum.thumbnailList)
+            binding.profileTabRcv.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onGetUserThumbnailFailure(message: String) {
+        TODO("Not yet implemented")
     }
 
     // 유저 썸네일 받아오기

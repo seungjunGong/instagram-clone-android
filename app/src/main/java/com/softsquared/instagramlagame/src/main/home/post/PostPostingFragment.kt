@@ -1,28 +1,73 @@
 package com.softsquared.instagramlagame.src.main.home.post
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.content.Context
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.annotation.NonNull
+import androidx.core.net.toUri
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentPostPostingBinding
-import java.io.FileNotFoundException
+import com.softsquared.instagramlagame.src.main.MainActivity
+import com.softsquared.instagramlagame.src.main.home.HomeFragmentDirections
+import com.softsquared.instagramlagame.util.GridSpacingItemDecoration
 
 
 class PostPostingFragment : BaseFragment<com.softsquared.instagramlagame.databinding.FragmentPostPostingBinding>(FragmentPostPostingBinding::bind, R.layout.fragment_post_posting) {
 
     private val uriArr = ArrayList<Uri>()
+    private var pikedImage : String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         getAllPhotos()
 
+        binding.goStory.setOnClickListener {
+            val action = PostPostingFragmentDirections.actionPostPostingFragmentToPostStoryFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        }
+
+        binding.postPostingClose.setOnClickListener{
+            requireActivity().onBackPressed()
+            applyWhiteColors()
+        }
+
+        // 다음 버튼
+        binding.postPostingNextBt.setOnClickListener{
+            val action = PostPostingFragmentDirections.actionPostPostingFragmentToUploadPostingFragment(pikedImage)
+            Navigation.findNavController(requireView()).navigate(action)
+        }
+
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        // 백버튼 설정
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                view?.let {
+                    requireActivity().onBackPressed()
+                    applyWhiteColors()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+
+
 
     private fun getAllPhotos() {
         val projection = arrayOf(
@@ -52,11 +97,40 @@ class PostPostingFragment : BaseFragment<com.softsquared.instagramlagame.databin
         cursor!!.close()
     }
 
+
     private fun startRCV(data: ArrayList<Uri>){
+
+
         binding.postPostingSelectIv.setImageURI(data[0])
 
-    }
+        val postRVAdapter = PostPostingRVAdapter(data)
 
+        val spanCount = 3 // 3 columns
+
+        val spacing = 10 // 50px
+
+        val includeEdge = false
+        binding.postPostingRcv.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
+        val layoutManager = GridLayoutManager(requireContext(), 3)
+
+        binding.postPostingRcv.setHasFixedSize(true)
+        binding.postPostingRcv.layoutManager = layoutManager
+        binding.postPostingRcv.adapter = postRVAdapter
+
+        postRVAdapter.setGalleryItemClickListener(object: PostPostingRVAdapter.GalleryItemClickListener{
+            override fun onItemClick(uri: Uri) {
+                Log.d("postRV","$uri")
+                binding.postPostingSelectIv.setImageURI(null)
+                binding.postPostingSelectIv.setImageURI(uri)
+                pikedImage = uri.toString()
+            }
+        })
+
+
+
+
+
+    }
 
 
 }
