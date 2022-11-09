@@ -57,13 +57,15 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
 
         // close
         binding.postStoryClose.setOnClickListener {
-            requireActivity().onBackPressed()
+            val action = PostStoryFragmentDirections.actionPostStoryFragmentToHomeFragment()
+            Navigation.findNavController(requireView()).navigate(action)
             applyWhiteColors()
         }
 
         binding.goPosting.setOnClickListener {
             val action = PostStoryFragmentDirections.actionPostStoryFragmentToPostPostingFragment()
             Navigation.findNavController(requireView()).navigate(action)
+            applyBlackColors()
         }
 
 
@@ -76,7 +78,8 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 view?.let {
-                    requireActivity().onBackPressed()
+                    val action = PostStoryFragmentDirections.actionPostStoryFragmentToHomeFragment()
+                    Navigation.findNavController(requireView()).navigate(action)
                     applyWhiteColors()
                 }
             }

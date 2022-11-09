@@ -1,8 +1,11 @@
 package com.softsquared.instagramlagame.src.main.home.post
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.net.toUri
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -30,6 +33,7 @@ class UploadPostingFragment : BaseFragment<FragmentUploadPostingBinding>(
 
         binding.uploadPostingBackBt.setOnClickListener {
             requireActivity().onBackPressed()
+            applyBlackColors()
         }
 
         binding.uploadPostingCompleteBt.setOnClickListener {
@@ -39,6 +43,21 @@ class UploadPostingFragment : BaseFragment<FragmentUploadPostingBinding>(
             val text = binding.uploadPostingContentEt.text
             uploadImage()
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        // 백버튼 설정
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                view?.let {
+                    requireActivity().onBackPressed()
+                    applyBlackColors()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun uploadImage() {

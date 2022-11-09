@@ -46,6 +46,10 @@ class AutoSearchFragment : BaseFragment<FragmentAutoSearchBinding>(FragmentAutoS
                         getPage = 0)
                     isLoading = true
                 }
+                if (searchTv.isEmpty()){
+                    binding.autoSearchRcv.visibility = View.GONE
+                    binding.autoSearchAllResultTv.visibility = View.GONE
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -61,7 +65,6 @@ class AutoSearchFragment : BaseFragment<FragmentAutoSearchBinding>(FragmentAutoS
 
     private fun editTextCheck() {
         if (binding.autoSearchEt.text.toString() == "") {
-            binding.autoSearchAllResultTv
             binding.autoSearchRcv.visibility = View.GONE
             binding.autoSearchAllResultTv.visibility = View.GONE
             binding.autoSearchCloseBt.visibility = View.GONE
@@ -76,7 +79,6 @@ class AutoSearchFragment : BaseFragment<FragmentAutoSearchBinding>(FragmentAutoS
     override fun onGetAutoSearchSuccess(response: AutoSearchResponse) {
         isLoading = false
         binding.autoSearchLoadingLayout.visibility = View.GONE
-
         binding.autoSearchRcv.visibility = View.VISIBLE
         val autoSearchRVD = AutoSearchRVAdapter(response.resultAutoSearch as ArrayList<ResultAutoSearch>)
         binding.autoSearchRcv.adapter = autoSearchRVD

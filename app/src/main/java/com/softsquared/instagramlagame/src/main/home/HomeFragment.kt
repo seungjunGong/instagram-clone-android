@@ -33,18 +33,20 @@ class HomeFragment :
     private var storyData = ArrayList<ResultHomeStory>()
     private var isLoading = false
     private var pageNumber = 0
-    private val homeRVD = FeedRVD(feedData, storyData)
     private var feedLoading = false
     private var storyLoading = false
+    private var homeRVD = FeedRVD(feedData,storyData)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // 홈화면 정보 받기
-        binding.profileLoading.loadingMainProgressBar.visibility = View.VISIBLE
+        binding.mainLoading.loadingMainProgressBar.visibility = View.VISIBLE
         HomeService(this).tryGetHomeStory()
         HomeService(this).tryGetFeed(pageNumber)
+        binding.homeRcv.layoutManager = LinearLayoutManager(requireContext())
+
 
         binding.homeRcv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -73,19 +75,7 @@ class HomeFragment :
             Navigation.findNavController(requireView()).navigate(action)
             applyBlackColors()
         }
-        // feed like 처리
-        homeRVD.setFeedLikeClickListener(object : FeedRVD.FeedClickListener {
-            override fun onLikeClick(postId: Int, liked: Boolean) {
-                if (liked) {
-                    HomeService(this@HomeFragment).tryPatchFeedLike(postId)
 
-                } else {
-                    HomeService(this@HomeFragment).tryPostFeedLike(postId)
-
-                }
-            }
-
-        })
     }
 
     fun moreItems() {
@@ -96,7 +86,6 @@ class HomeFragment :
 
     override fun onGetFeedSuccess(response: HomeFeedResponse) {
 
-        Log.d("HomeFragment", "$response")
         if (response.result.postList.isNotEmpty()) {
 
             if (isLoading) {
@@ -111,14 +100,10 @@ class HomeFragment :
                 }
                 binding.homeRcv.adapter!!.notifyItemInserted(feedData.size)
 
-
+                feedLoading = true
                 isLoading = false
             } else {
-                feedData.apply {
-                    for (feedData in response.result.postList) {
-                        add(feedData)
-                    }
-                }
+                feedData = response.result.postList as ArrayList<FeedResult>
                 feedLoading = true
                 checkLoading()
             }
@@ -130,25 +115,53 @@ class HomeFragment :
 
     private fun checkLoading() {
         if (feedLoading && storyLoading) {
+            homeRVD = FeedRVD(feedData, storyData)
             binding.homeRcv.adapter = homeRVD
-        }
-        binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
 
-        // 유저 닉네임 클릭 리스너
-        homeRVD.setUserNickClickListener(object : FeedRVD.FeedUserNickClickListener {
-            override fun onUserNickClick(userNick: String, userid: Int) {
-                // 데이터 전달
-                val action = HomeFragmentDirections.actionHomeFragmentToOthersProFileFragment(
-                    userNickName = userNick,
-                    userId = userid)
-                Navigation.findNavController(requireView()).navigate(action)
-            }
-        })
+            // feed like 처리
+            homeRVD.setFeedLikeClickListener(object : FeedRVD.FeedClickListener {
+                override fun onLikeClick(postId: Int, liked: Boolean) {
+                    if (liked) {
+                        HomeService(this@HomeFragment).tryPatchFeedLike(postId)
+
+                    } else {
+                        HomeService(this@HomeFragment).tryPostFeedLike(postId)
+
+                    }
+                }
+
+            })
+
+            // 유저 닉네임 클릭 리스너
+            homeRVD.setUserNickClickListener(object : FeedRVD.FeedNickClickListener {
+                override fun onUserNickClick(userNick: String, userid: Int) {
+                    // 데이터 전달
+                    val action = HomeFragmentDirections.actionHomeFragmentToOthersProFileFragment(
+                        userNickName = userNick,
+                        userId = userid)
+                    Navigation.findNavController(requireView()).navigate(action)
+                }
+            })
+
+            // 코멘트 클릭 리스너
+            homeRVD.setCommentClickListener(object : FeedRVD.FeedCommentClickListener{
+                override fun onCommentClick(postId: Int) {
+                    // 데이터 전달
+                    val action = HomeFragmentDirections.actionHomeFragmentToCommentFragment(postId)
+                    Navigation.findNavController(requireView()).navigate(action)
+                    hideBttnav()
+                }
+            })
+
+            Log.d("HomeFragment", "$homeRVD")
+            binding.mainLoading.loadingMainProgressBar.visibility = View.GONE
+        }
     }
 
 
     override fun onGetFeedFailure(message: String) {
-        binding.profileLoading.loadingMainProgressBar.visibility = View.GONE
+        binding.mainLoading.loadingMainProgressBar.visibility = View.GONE
+        Log.d("HomeFragment", "ERRROR : $message")
     }
 
     override fun onPostFeedLikeSuccess(response: FeedLikeResponse) {
@@ -169,7 +182,7 @@ class HomeFragment :
 
     override fun onGetHomeStorySuccess(response: HomeStoryResponse) {
 
-        Log.d("storyData", "$response")
+        Log.d("HomeFragment", "$response")
         with(response.resultHomeStory) {
             storyData.apply {
                 for (result in this@with) {
@@ -178,7 +191,7 @@ class HomeFragment :
                     }
                 }
                 for (result in this@with) {
-                    if (result.visitCnt > result.storyDataList.size) {
+                    if (result.visitCnt >= result.storyDataList.size) {
                         add(result)
                     }
                 }

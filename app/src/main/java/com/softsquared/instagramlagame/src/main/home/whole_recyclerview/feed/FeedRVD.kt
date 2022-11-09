@@ -1,7 +1,6 @@
 package com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed
 
 import android.animation.ValueAnimator
-import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -110,6 +109,15 @@ class FeedRVD(
                 holder.bind(feedData[position - 1])
                 holder.binding.feedUserIdTv.setOnClickListener {
                     fUserNickClickListener.onUserNickClick( feedData[position-1].nickname, feedData[position-1].userId)
+                }
+                holder.binding.feedGoCommentBt.setOnClickListener {
+                    fCommentClickListener.onCommentClick(feedData[position-1].postId)
+                }
+                holder.binding.feedCommentUserTv.setOnClickListener {
+                    fCommentClickListener.onCommentClick(feedData[position-1].postId)
+                }
+                holder.binding.feedAddCommentTv.setOnClickListener {
+                    fCommentClickListener.onCommentClick(feedData[position-1].postId)
                 }
             }
             is EmptyViewHolder -> {}
@@ -229,12 +237,21 @@ class FeedRVD(
         }
     }
 
-    interface FeedUserNickClickListener{
+    // 클릭 리스너 구현
+    interface FeedNickClickListener{
         fun onUserNickClick(userNick: String, userid: Int)
     }
-    private lateinit var fUserNickClickListener: FeedUserNickClickListener
-    fun setUserNickClickListener(userNickClickListener: FeedUserNickClickListener){
+    private lateinit var fUserNickClickListener: FeedNickClickListener
+    fun setUserNickClickListener(userNickClickListener: FeedNickClickListener){
         fUserNickClickListener = userNickClickListener
+    }
+
+    interface FeedCommentClickListener{
+        fun onCommentClick(postId: Int)
+    }
+    private lateinit var fCommentClickListener: FeedCommentClickListener
+    fun setCommentClickListener(commentClickListener: FeedCommentClickListener){
+        fCommentClickListener = commentClickListener
     }
 
     // 데이터가 없을 때 보여줄 부분에 해당하는 뷰객체 가지는 뷰홀더

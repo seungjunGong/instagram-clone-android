@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.softsquared.instagramlagame.databinding.FeedVpItemBinding
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedImgUrl
 
-class FeedVPD(private val feedImageList : ArrayList<String>) : RecyclerView.Adapter<FeedVPD.PagerViewHolder>() {
+class FeedVPD(private val feedImageList : List<FeedImgUrl>) : RecyclerView.Adapter<FeedVPD.PagerViewHolder>() {
 
     // 뷰페이저 인디케이터 전달하기 위한 인터페이스
     interface FeedChangeListener{
@@ -33,8 +34,8 @@ class FeedVPD(private val feedImageList : ArrayList<String>) : RecyclerView.Adap
     override fun getItemCount(): Int = feedImageList.size
 
     inner class PagerViewHolder(private val binding: FeedVpItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(image: String) {
-            Glide.with(itemView.context).load(image).into(binding.feedIv)
+        fun bind(image: FeedImgUrl) {
+            Glide.with(itemView.context).load(image.imgUrl).into(binding.feedIv)
         }
     }
 }

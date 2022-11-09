@@ -36,10 +36,12 @@ class PostPostingFragment : BaseFragment<com.softsquared.instagramlagame.databin
         binding.goStory.setOnClickListener {
             val action = PostPostingFragmentDirections.actionPostPostingFragmentToPostStoryFragment()
             Navigation.findNavController(requireView()).navigate(action)
+            applyBlackColors()
         }
 
         binding.postPostingClose.setOnClickListener{
-            requireActivity().onBackPressed()
+            val action = PostPostingFragmentDirections.actionPostPostingFragmentToHomeFragment()
+            Navigation.findNavController(requireView()).navigate(action)
             applyWhiteColors()
         }
 
@@ -58,7 +60,8 @@ class PostPostingFragment : BaseFragment<com.softsquared.instagramlagame.databin
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 view?.let {
-                    requireActivity().onBackPressed()
+                    val action = PostPostingFragmentDirections.actionPostPostingFragmentToHomeFragment()
+                    Navigation.findNavController(requireView()).navigate(action)
                     applyWhiteColors()
                 }
             }

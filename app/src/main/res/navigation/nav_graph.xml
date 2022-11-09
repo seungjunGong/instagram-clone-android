@@ -21,6 +21,12 @@
             app:enterAnim="@anim/slid_left"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_commentFragment"
+            app:destination="@id/commentFragment"
+            app:enterAnim="@anim/slid_left"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"/>
 
     </fragment>
 
@@ -271,6 +277,16 @@
             app:enterAnim="@anim/slid_left"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.softsquared.instagramlagame.src.main.home.comment.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" >
+
+        <argument
+            android:name="postId"
+            app:argType="integer"/>
     </fragment>
 
 

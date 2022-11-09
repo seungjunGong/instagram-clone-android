@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/commentFragment"
+    tools:context=".src.main.home.comment.CommentFragment">
+
+    <ImageView
+        android:id="@+id/comment_back_bt"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_balck_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="댓글"
+        android:textSize="@dimen/profile_title_size"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toEndOf="@id/comment_back_bt"
+        app:layout_constraintTop_toTopOf="@id/comment_back_bt"
+        app:layout_constraintBottom_toBottomOf="@id/comment_back_bt"/>
+
+    <ImageView
+        android:id="@+id/comment_go_dm"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintTop_toTopOf="@id/comment_back_bt"
+        app:layout_constraintBottom_toBottomOf="@id/comment_back_bt"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/comment_profile_iv"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/white"
+        android:padding="3dp"
+        app:civ_border_overlay="true"
+        app:civ_border_width="0dp"
+        app:civ_border_color="@color/white"
+        android:src="@drawable/ic_basic_profile"
+        app:layout_constraintTop_toBottomOf="@id/comment_back_bt"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/comment_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/comment_profile_iv"
+        app:layout_constraintStart_toEndOf="@id/comment_profile_iv"
+        app:layout_constraintEnd_toStartOf="@id/comment_go_dm">
+
+        <TextView
+            android:id="@+id/comment_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="kiki_zzalasdsa;ldklsa;ldksl;kkoekwqokwoqkwdoqkpowqwkdoqkdasa'wkpkwokdkw'kdoakd'akwokwdkdakpakopw"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <TextView
+        android:id="@+id/comment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4일"
+        app:layout_constraintTop_toBottomOf="@id/comment_layout"
+        app:layout_constraintStart_toStartOf="@id/comment_layout"
+        android:textColor="@color/basic_gray"
+        android:textSize="13sp"
+        android:layout_marginTop="4dp"/>
+
+    <View
+        android:id="@+id/comment_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bright_gray"
+        app:layout_constraintTop_toBottomOf="@id/comment_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comment_rcv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/comment_item"
+        app:layout_constraintTop_toBottomOf="@id/comment_divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/comment_et_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/bright_gray"
+        app:layout_constraintBottom_toTopOf="@id/comment_et_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/comment_et_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:layout_marginStart="@dimen/basic_margin_side"
+        android:layout_marginEnd="@dimen/basic_margin_side"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/comment_profile_et_iv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            app:civ_border_overlay="true"
+            android:padding="3dp"
+            app:civ_border_width="0dp"
+            app:civ_border_color="@color/white"
+            android:src="@drawable/ic_basic_profile"
+            app:layout_constraintTop_toBottomOf="@id/comment_back_bt"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <EditText
+            android:id="@+id/comment_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="댓글 달기.."
+            android:textSize="14sp"
+            android:layout_weight="1"
+            android:textCursorDrawable="@color/basic_green"
+            android:background="@color/transparent"
+            android:layout_marginStart="15dp"/>
+
+        <TextView
+            android:id="@+id/comment_post_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/bright_sky_blue"/>
+    </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

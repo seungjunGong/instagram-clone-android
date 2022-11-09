@@ -11,7 +11,7 @@ data class FeedResult(
     @SerializedName("hashTagList")
     val hashTagList: List<String>,
     @SerializedName("imgUrlList")
-    val imgUrlList: ArrayList<String>,
+    val imgUrlList: List<FeedImgUrl>,
     @SerializedName("likeCount")
     val likeCount: Int,
     @SerializedName("myPostLike")
