@@ -31,4 +31,6 @@ class SearchRVAdapter(private val list: ArrayList<ResultSearchThum>): RecyclerVi
     }
 
     override fun getItemCount(): Int = list.size
+
+
 }

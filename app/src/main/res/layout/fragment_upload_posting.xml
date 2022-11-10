@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/uploadPostingFragment"
-    tools:context=".src.main.home.post.UploadPostingFragment">
+    tools:context=".src.main.home.post.posting.UploadPostingFragment">
 
     <LinearLayout
         android:id="@+id/uplaod_posting_title_layout"

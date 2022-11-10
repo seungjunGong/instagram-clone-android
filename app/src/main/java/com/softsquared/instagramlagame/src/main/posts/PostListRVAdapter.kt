@@ -1,142 +1,26 @@
-package com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed
+package com.softsquared.instagramlagame.src.main.posts
 
 import android.animation.ValueAnimator
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.softsquared.instagramlagame.R
-import com.softsquared.instagramlagame.databinding.EmptyLoadingBinding
-
 import com.softsquared.instagramlagame.databinding.FeedItemBinding
-import com.softsquared.instagramlagame.databinding.HomeStoryBinding
-import com.softsquared.instagramlagame.src.main.home.HomeFragmentDirections
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.FeedRVD
+import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.FeedVPD
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedResult
-import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.StoryRVD
-import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.ResultHomeStory
-import com.softsquared.instagramlagame.src.signup.birthday.BirthDayFragmentDirections
 
-class FeedRVD(
-    private val feedData: ArrayList<FeedResult>,
-    private val storyData: ArrayList<ResultHomeStory>,
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private val HEADER = 0 // 헤더 뷰
-    private val ITEM = 1 // 리사이클러 피드 아이템 뷰
-    private val EMPTY = 2 // 데이터가 없을 때 뜨는 뷰
-
-    // 피드 클릭 리스너
-    interface FeedClickListener {
-        fun onLikeClick(postId: Int, liked: Boolean)
-    }
-
-    private var isLike: Boolean = false
-    private lateinit var fLikeClickListener: FeedClickListener
-    fun setFeedLikeClickListener(feedLikeClickListener: FeedClickListener) {
-        fLikeClickListener = feedLikeClickListener
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> {
-                HEADER
-            }
-            feedData.size + 1 -> {
-                EMPTY
-            }
-            else -> {
-                ITEM
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            HEADER ->
-                HeaderViewHolder(
-                    HomeStoryBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            ITEM ->
-                ItemViewHolder(
-                    FeedItemBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            EMPTY -> // EMPTY
-                EmptyViewHolder(
-                    EmptyLoadingBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            else -> {
-                throw ClassCastException("Unknown viewType $viewType")
-            }
-        }
-    }
+class PostListRVAdapter(private val feedData: ArrayList<FeedResult>): RecyclerView.Adapter<PostListRVAdapter.ViewHolder>() {
 
 
-    override fun getItemCount(): Int {
-        return if (feedData.size == 0) 1 else feedData.size + 2
-    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            // HEADER
-            is HeaderViewHolder -> {
-                val storyRVD = StoryRVD(storyData)
-                holder.binding.storyRcv.adapter = storyRVD
-                Log.d("storyData", "실행 $storyData")
-
-            }
-            // ITEM
-            is ItemViewHolder -> {
-                holder.bind(feedData[position - 1])
-                holder.binding.feedUserIdTv.setOnClickListener {
-                    fUserNickClickListener.onUserNickClick( feedData[position-1].nickname, feedData[position-1].userId)
-                }
-                holder.binding.feedGoCommentBt.setOnClickListener {
-                    fCommentClickListener.onCommentClick(feedData[position-1].postId)
-                }
-                holder.binding.feedCommentUserTv.setOnClickListener {
-                    fCommentClickListener.onCommentClick(feedData[position-1].postId)
-                }
-                holder.binding.feedAddCommentTv.setOnClickListener {
-                    fCommentClickListener.onCommentClick(feedData[position-1].postId)
-                }
-            }
-            is EmptyViewHolder -> {}
-        }
-    }
-
-    // 헤더 부분에 해당하는 뷰객체 가지는 뷰홀더 스토리를 띄워줌
-    inner class HeaderViewHolder(val binding: HomeStoryBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind() {
-        }
-    }
-
-
-    // 피드 항목에 해당하는 뷰객체 가지는 뷰홀더
-    inner class ItemViewHolder(val binding: FeedItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: FeedResult) {
+    inner class ViewHolder(val binding: FeedItemBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: FeedResult){
             var likeCount = data.likeCount
             // 데이터 연결
             Glide.with(binding.feedProfileIv.context)
@@ -235,7 +119,37 @@ class FeedRVD(
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding: FeedItemBinding = FeedItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(feedData[position])
+        holder.binding.feedUserIdTv.setOnClickListener {
+            fUserNickClickListener.onUserNickClick( feedData[position-1].nickname, feedData[position-1].userId)
+        }
+        holder.binding.feedGoCommentBt.setOnClickListener {
+            fCommentClickListener.onCommentClick(feedData[position-1].postId)
+        }
+        holder.binding.feedCommentUserTv.setOnClickListener {
+            fCommentClickListener.onCommentClick(feedData[position-1].postId)
+        }
+        holder.binding.feedAddCommentTv.setOnClickListener {
+            fCommentClickListener.onCommentClick(feedData[position-1].postId)
+        }
+    }
+
+    override fun getItemCount(): Int  = feedData.size
+
+
     // 클릭 리스너 구현
+    private var isLike: Boolean = false
+    private lateinit var fLikeClickListener: FeedRVD.FeedClickListener
+    fun setFeedLikeClickListener(feedLikeClickListener: FeedRVD.FeedClickListener) {
+        fLikeClickListener = feedLikeClickListener
+    }
+
     interface FeedNickClickListener{
         fun onUserNickClick(userNick: String, userid: Int)
     }
@@ -251,14 +165,4 @@ class FeedRVD(
     fun setCommentClickListener(commentClickListener: FeedCommentClickListener){
         fCommentClickListener = commentClickListener
     }
-
-    // 데이터가 없을 때 보여줄 부분에 해당하는 뷰객체 가지는 뷰홀더
-    inner class EmptyViewHolder(val binding: EmptyLoadingBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
-
-        }
-    }
-
-
 }

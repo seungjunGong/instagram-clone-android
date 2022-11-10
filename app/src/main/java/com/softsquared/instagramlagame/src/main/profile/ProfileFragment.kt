@@ -145,10 +145,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             with(response.resultProFileMyData){
                 myProFileUrl = profileUrl
                 if (link != ""){
-                    if(description != ""){
-                        binding.profileUserIntroduceTv.visibility = View.VISIBLE
-                    }
                     binding.profileGoMyLinkTv.visibility = View.VISIBLE
+                }
+                if(description != ""){
+                    binding.profileUserIntroduceTv.visibility = View.VISIBLE
                 }
                 if(profileUrl != ""){
                     Glide.with(requireContext()).load(profileUrl).error("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/ic_profile.png?alt=media&token=0053a8f4-3cdf-44b7-8dbe-768ac4d4bba4").into(binding.profileImageIv)

@@ -39,73 +39,101 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="20dp"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/comment_profile_iv"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:background="@color/white"
-        android:padding="3dp"
-        app:civ_border_overlay="true"
-        app:civ_border_width="0dp"
-        app:civ_border_color="@color/white"
-        android:src="@drawable/ic_basic_profile"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/comment_back_bt"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/comment_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="3dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="@id/comment_profile_iv"
-        app:layout_constraintStart_toEndOf="@id/comment_profile_iv"
-        app:layout_constraintEnd_toStartOf="@id/comment_go_dm">
-
-        <TextView
-            android:id="@+id/comment_user"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="kiki_zzalasdsa;ldklsa;ldksl;kkoekwqokwoqkwdoqkpowqwkdoqkdasa'wkpkwokdkw'kdoakd'akwokwdkdakpakopw"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="15sp"/>
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/comment_content_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/comment_profile_iv"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@color/white"
+                    android:padding="3dp"
+                    app:civ_border_overlay="true"
+                    app:civ_border_width="0dp"
+                    app:civ_border_color="@color/white"
+                    android:src="@drawable/ic_basic_profile"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/comment_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="3dp"
+                    android:orientation="vertical"
+                    android:gravity="left"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/comment_profile_iv"
+                    app:layout_constraintStart_toEndOf="@id/comment_profile_iv"
+                    android:layout_marginEnd="50dp">
+
+                    <TextView
+                        android:id="@+id/comment_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="kiki_zzala"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"/>
+
+                    <TextView
+                        android:id="@+id/comment_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4일"
+                        app:layout_constraintTop_toBottomOf="@id/comment_layout"
+                        app:layout_constraintStart_toStartOf="@id/comment_layout"
+                        android:textColor="@color/basic_gray"
+                        android:textSize="13sp"
+                        android:layout_marginTop="4dp"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <TextView
-        android:id="@+id/comment_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4일"
-        app:layout_constraintTop_toBottomOf="@id/comment_layout"
-        app:layout_constraintStart_toStartOf="@id/comment_layout"
-        android:textColor="@color/basic_gray"
-        android:textSize="13sp"
-        android:layout_marginTop="4dp"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/comment_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/bright_gray"
-        app:layout_constraintTop_toBottomOf="@id/comment_time"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"/>
+            <View
+                android:id="@+id/comment_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/bright_gray"
+                android:layout_marginTop="10dp"
+                />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/comment_rcv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/comment_item"
-        app:layout_constraintTop_toBottomOf="@id/comment_divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comment_rcv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/comment_item"
+                />
+
+            <include
+                android:id="@+id/comment_loading"
+                layout="@layout/empty_loading"
+                android:visibility="gone"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+
+
 
     <View
         android:id="@+id/comment_et_divider"
@@ -165,6 +193,8 @@
             android:textSize="14sp"
             android:textColor="@color/bright_sky_blue"/>
     </LinearLayout>
+
+
 
 
 

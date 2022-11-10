@@ -168,6 +168,11 @@
                 android:paddingBottom="60dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 />
+
+            <include
+                android:id="@+id/shopping_loading_bar"
+                layout="@layout/empty_loading"
+                android:visibility="gone"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
 

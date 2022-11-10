@@ -33,17 +33,18 @@
         android:layout_marginEnd="@dimen/basic_margin_side">
 
        <TextView
+           android:id="@+id/comment_content_tv"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="kiki_zzakd'akwokwdkdakpakopw"
            android:textColor="@color/black"
-           android:textStyle="bold"
            android:layout_weight="1"
            android:textSize="15sp"/>
 
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:src="@drawable/ic_gray_heart"
             android:layout_gravity="center_vertical"/>

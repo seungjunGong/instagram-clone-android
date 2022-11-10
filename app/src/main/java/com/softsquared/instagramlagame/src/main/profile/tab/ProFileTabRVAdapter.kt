@@ -17,6 +17,7 @@ class ProFileTabRVAdapter(private val thumbnail: List<Thumbnail>): RecyclerView.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(thumbnail[position])
+        holder.itemView.setOnClickListener { feedItemClickListener.onItemClick(thumbnail[position].postId) }
     }
 
     override fun getItemCount(): Int = thumbnail.size
@@ -33,6 +34,14 @@ class ProFileTabRVAdapter(private val thumbnail: List<Thumbnail>): RecyclerView.
         }
 
     }
+    interface FeedItemClickListener{
+        fun onItemClick(postId:Int)
+    }
+    private lateinit var feedItemClickListener: FeedItemClickListener
+    fun setFeedItemClickListener(itemClickListener: FeedItemClickListener){
+        feedItemClickListener = itemClickListener
+    }
+
 
 
 }

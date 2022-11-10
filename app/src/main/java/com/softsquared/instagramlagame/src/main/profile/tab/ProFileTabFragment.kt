@@ -3,11 +3,14 @@ package com.softsquared.instagramlagame.src.main.profile.tab
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.ApplicationClass
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentProfileTabItemBinding
+import com.softsquared.instagramlagame.src.main.others.OthersProFileFragmentDirections
+import com.softsquared.instagramlagame.src.main.profile.ProfileFragmentDirections
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileCompleteResponse
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileCompleteViewData
 import com.softsquared.instagramlagame.src.main.user_thum.UserThumInterface
@@ -97,8 +100,17 @@ class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabIte
 
             binding.profileTabRcv.setHasFixedSize(true)
             binding.profileTabRcv.layoutManager = layoutManager
-            binding.profileTabRcv.adapter = ProFileTabRVAdapter(response.resultUserThum.thumbnailList)
+            val proFileTabRVD = ProFileTabRVAdapter(response.resultUserThum.thumbnailList)
+            binding.profileTabRcv.adapter = proFileTabRVD
             binding.profileTabRcv.visibility = View.VISIBLE
+
+            proFileTabRVD.setFeedItemClickListener(object : ProFileTabRVAdapter.FeedItemClickListener{
+                override fun onItemClick(postId: Int) {
+                    val action =
+                        ProfileFragmentDirections.actionProfileFragmentToPostListFragment(postId)
+                    Navigation.findNavController(requireView()).navigate(action)
+                }
+            })
         }
     }
 

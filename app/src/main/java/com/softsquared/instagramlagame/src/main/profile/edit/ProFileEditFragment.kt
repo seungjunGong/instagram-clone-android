@@ -155,6 +155,7 @@ class ProFileEditFragment: BaseFragment<FragmentProfileEditBinding>(FragmentProf
         showCustomToast("수정 되었습니다.")
         val action = ProFileEditFragmentDirections.actionProFileEditFragmentToProfileFragment()
         Navigation.findNavController(requireView()).navigate(action)
+        showBttnav()
     }
 
     override fun onPatchProFileFailure(message: String) {

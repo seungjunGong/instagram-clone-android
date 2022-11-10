@@ -1,25 +1,17 @@
-package com.softsquared.instagramlagame.src.main.home.post
+package com.softsquared.instagramlagame.src.main.home.post.posting
 
 import android.content.Context
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.NonNull
-import androidx.core.net.toUri
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentPostPostingBinding
-import com.softsquared.instagramlagame.src.main.MainActivity
-import com.softsquared.instagramlagame.src.main.home.HomeFragmentDirections
 import com.softsquared.instagramlagame.util.GridSpacingItemDecoration
 
 
@@ -32,6 +24,7 @@ class PostPostingFragment : BaseFragment<com.softsquared.instagramlagame.databin
         super.onViewCreated(view, savedInstanceState)
 
         getAllPhotos()
+        applyBlackColors()
 
         binding.goStory.setOnClickListener {
             val action = PostPostingFragmentDirections.actionPostPostingFragmentToPostStoryFragment()
@@ -120,7 +113,8 @@ class PostPostingFragment : BaseFragment<com.softsquared.instagramlagame.databin
         binding.postPostingRcv.layoutManager = layoutManager
         binding.postPostingRcv.adapter = postRVAdapter
 
-        postRVAdapter.setGalleryItemClickListener(object: PostPostingRVAdapter.GalleryItemClickListener{
+        postRVAdapter.setGalleryItemClickListener(object:
+            PostPostingRVAdapter.GalleryItemClickListener {
             override fun onItemClick(uri: Uri) {
                 Log.d("postRV","$uri")
                 binding.postPostingSelectIv.setImageURI(null)

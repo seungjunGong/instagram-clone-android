@@ -27,6 +27,10 @@
             app:enterAnim="@anim/slid_left"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_postListFragment"
+            app:destination="@id/postListFragment" />
+
 
     </fragment>
 
@@ -38,6 +42,9 @@
         <action
             android:id="@+id/action_searchFragment_to_autoSearchFragment"
             app:destination="@id/autoSearchFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_postListFragment"
+            app:destination="@id/postListFragment" />
     </fragment>
 
     <fragment
@@ -65,6 +72,9 @@
         <action
             android:id="@+id/action_profileFragment_to_mySettingFragment"
             app:destination="@id/mySettingFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_postListFragment"
+            app:destination="@id/postListFragment" />
 
 
     </fragment>
@@ -100,7 +110,7 @@
         <action
             android:id="@+id/action_proFileEditFragment_to_profileFragment"
             app:destination="@id/profileFragment"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/profileFragment"/>
 
 
@@ -119,7 +129,7 @@
         <action
             android:id="@+id/action_proFileLinkEditFragment_to_proFileEditFragment"
             app:destination="@id/proFileEditFragment"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/proFileEditFragment"
             />
     </fragment>
@@ -135,7 +145,7 @@
         <action
             android:id="@+id/action_proFileNickNameEditFragment_to_proFileEditFragment"
             app:destination="@id/proFileEditFragment"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/proFileEditFragment"
             />
     </fragment>
@@ -153,7 +163,7 @@
         <action
             android:id="@+id/action_proFileIntroduceEditFragment_to_proFileEditFragment"
             app:destination="@id/proFileEditFragment"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/proFileEditFragment"
             />
     </fragment>
@@ -171,7 +181,7 @@
         <action
             android:id="@+id/action_proFileNameEditFragment_to_proFileEditFragment"
             app:destination="@id/proFileEditFragment"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/proFileEditFragment"
             />
     </fragment>
@@ -182,7 +192,9 @@
         tools:layout="@layout/fragment_my_setting" >
         <action
             android:id="@+id/action_mySettingFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/profileFragment"/>
 
         <argument
             android:name="userNicName"
@@ -196,7 +208,9 @@
         tools:layout="@layout/fragment_others_profile" >
         <action
             android:id="@+id/action_othersProFileFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/homeFragment"/>
 
         <argument
             android:name="userNickName"
@@ -204,10 +218,13 @@
         <argument
             app:argType="integer"
             android:name="userId" />
+        <action
+            android:id="@+id/action_othersProFileFragment_to_postListFragment"
+            app:destination="@id/postListFragment" />
     </fragment>
     <fragment
         android:id="@+id/postPostingFragment"
-        android:name="com.softsquared.instagramlagame.src.main.home.post.PostPostingFragment"
+        android:name="com.softsquared.instagramlagame.src.main.home.post.posting.PostPostingFragment"
         android:label="fragment_post_posting"
         tools:layout="@layout/fragment_post_posting" >
         <action
@@ -216,7 +233,7 @@
             app:enterAnim="@anim/slid_left"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/postStoryFragment"/>
         <action
             android:id="@+id/action_postPostingFragment_to_homeFragment"
@@ -224,7 +241,7 @@
             app:enterAnim="@anim/slid_left"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/homeFragment"/>
         <action
             android:id="@+id/action_postPostingFragment_to_uploadPostingFragment"
@@ -242,7 +259,7 @@
             app:enterAnim="@anim/slide_right"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slid_left"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/postPostingFragment"/>
         <action
             android:id="@+id/action_postStoryFragment_to_homeFragment"
@@ -250,21 +267,32 @@
             app:enterAnim="@anim/slid_left"
             app:popEnterAnim="@anim/wait_anim"
             app:popExitAnim="@anim/slide_right"
-            app:popUpToInclusive="false"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/homeFragment"/>
     </fragment>
     <fragment
         android:id="@+id/uploadPostingFragment"
-        android:name="com.softsquared.instagramlagame.src.main.home.post.UploadPostingFragment"
+        android:name="com.softsquared.instagramlagame.src.main.home.post.posting.UploadPostingFragment"
         android:label="fragment_upload_posting"
         tools:layout="@layout/fragment_upload_posting" >
         <action
             android:id="@+id/action_uploadPostingFragment_to_postPostingFragment"
-            app:destination="@id/postPostingFragment" />
+            app:destination="@id/postPostingFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/postPostingFragment"/>
 
         <argument
             android:name="pickedImage"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_uploadPostingFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/slid_left"
+            app:popEnterAnim="@anim/wait_anim"
+            app:popExitAnim="@anim/slide_right"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/homeFragment"/>
+
     </fragment>
     <fragment
         android:id="@+id/autoSearchFragment"
@@ -287,6 +315,17 @@
         <argument
             android:name="postId"
             app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/postListFragment"
+        android:name="com.softsquared.instagramlagame.src.main.posts.PostListFragment"
+        android:label="fragment_post_list"
+        tools:layout="@layout/fragment_post_list" >
+
+        <argument
+            android:name="getPostId"
+            app:argType="integer"/>
+
     </fragment>
 
 

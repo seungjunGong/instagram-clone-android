@@ -1,15 +1,10 @@
-package com.softsquared.instagramlagame.src.main.home.post
+package com.softsquared.instagramlagame.src.main.home.post.posting
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.parser.ColorParser
-import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.databinding.GridItemBinding
 
 class PostPostingRVAdapter(private val uriArr: MutableList<Uri>): RecyclerView.Adapter<PostPostingRVAdapter.ViewHolder>() {

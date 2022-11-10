@@ -25,6 +25,7 @@ class SearchFragment :
     private var searchData = ArrayList<ResultSearchThum>()
     private var page = 0
     private var isLoading = false
+    private var searchRVD = SearchRVAdapter(searchData)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,11 +59,13 @@ class SearchFragment :
                 }
             }
         })
+
+
     }
 
     fun moreItems() {
         page++
-        binding.searchLoadingProgressBar.signUpPhoneProgressBar.visibility = View.VISIBLE
+        binding.searchLoadingProgressBar.loadingProgressBar.visibility = View.VISIBLE
         Log.d("SearchTest", "추가 함수 실행")
         SearchService(this).tryGetSearchThumbNail(page)
     }
@@ -71,7 +74,7 @@ class SearchFragment :
 
         if (response.resultSearchThum.isNotEmpty()) {
             if (isLoading) {
-                binding.searchLoadingProgressBar.signUpPhoneProgressBar.visibility = View.GONE
+                binding.searchLoadingProgressBar.loadingProgressBar.visibility = View.GONE
                 searchData.apply {
                     for (data in response.resultSearchThum) {
                         add(data)
@@ -91,18 +94,11 @@ class SearchFragment :
                     spacing,
                     includeEdge))
                 val layoutManager = GridLayoutManager(requireContext(), 3)
-//        layoutManager.spanSizeLookup = object :GridLayoutManager.SpanSizeLookup(){
-//            override fun getSpanSize(position: Int): Int {
-//                return when(position){
-//                    0 -> 1
-//                    list.size -> 1
-//                    else -> 3
-//                }
-//            }
-//        }
+
                 binding.searchRcv.setHasFixedSize(true)
                 binding.searchRcv.layoutManager = layoutManager
-                binding.searchRcv.adapter = SearchRVAdapter(searchData)
+                searchRVD = SearchRVAdapter(searchData)
+                binding.searchRcv.adapter = searchRVD
 
             }
 
