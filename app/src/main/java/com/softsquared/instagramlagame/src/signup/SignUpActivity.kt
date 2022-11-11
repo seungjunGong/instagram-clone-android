@@ -7,6 +7,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.softsquared.instagramlagame.config.ApplicationClass
+import com.softsquared.instagramlagame.config.ApplicationClass.Companion.USER_ID
 import com.softsquared.instagramlagame.config.BaseActivity
 import com.softsquared.instagramlagame.databinding.ActivitySignupBinding
 import com.softsquared.instagramlagame.src.login.LoginActivityInterface
@@ -70,6 +71,7 @@ class SignUpActivity : BaseActivity<ActivitySignupBinding>(ActivitySignupBinding
             // jwt 토큰 저장
             val editor : SharedPreferences.Editor = ApplicationClass.sSharedPreferences.edit()
             editor.putString(ApplicationClass.X_ACCESS_TOKEN, response.resultLogin.jwt)
+            editor.putInt(USER_ID, response.resultLogin.userIdx)
             editor.apply()
 
             val i = Intent(this, MainActivity::class.java)

@@ -35,7 +35,7 @@ class FeedVPD(private val feedImageList : List<FeedImgUrl>) : RecyclerView.Adapt
 
     inner class PagerViewHolder(private val binding: FeedVpItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(image: FeedImgUrl) {
-            Glide.with(itemView.context).load(image.imgUrl).into(binding.feedIv)
+            Glide.with(itemView.context).load(image.imgUrl).error("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/feed_image_sample.PNG?alt=media&token=d83e31ab-c0e6-4546-8820-fab7e1a7e552").into(binding.feedIv)
         }
     }
 }

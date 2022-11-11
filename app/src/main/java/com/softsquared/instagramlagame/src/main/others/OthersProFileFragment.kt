@@ -16,7 +16,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentOthersProfileBinding
-import com.softsquared.instagramlagame.src.main.home.post.PostStoryFragmentDirections
 import com.softsquared.instagramlagame.src.main.others.follow.FollowInterface
 import com.softsquared.instagramlagame.src.main.others.follow.FollowResponse
 import com.softsquared.instagramlagame.src.main.others.follow.FollowService

@@ -18,7 +18,7 @@ class CommentRVAdapter(private val commentData: List<CommentPageContent>): Recyc
 
     inner class ViewHolder(private val binding: CommentItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: CommentPageContent){
-            if(data.storyExist == "Activate"){
+            if(data.storyExist == "Activated"){
                 Glide.with(binding.commentProfileIv.context).load(data.userImg).error("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/ic_basic_profile.png?alt=media&token=6632dbfe-f55f-4692-b5b5-f3ee0cbb04cb").into(binding.commentProfileIv)
 
             } else{

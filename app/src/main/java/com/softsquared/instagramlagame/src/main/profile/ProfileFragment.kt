@@ -42,12 +42,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     // 사람 찾아보기 토글
     private var showRecommendFollow = false
     private var myProFileUrl : String = ""
+    private var mylink = ""
+    private var myDescription = ""
+    private var myName = ""
+    private var myNickName = ""
     private var loading : Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        applyWhiteColors()
         binding.profileFollowFindLayout.visibility = View.GONE
 
         // 내 프로필 정보 받아오기
@@ -112,6 +116,23 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 hideBttnav()
             }
         }
+
+        // 프로필 이미지편집
+        binding.profileImageIv.setOnClickListener {
+            val bottomSheetDialog = BottomSheetDialog(requireContext(), R.style.BottomSheetDialogTheme)
+            val bottomSheetView = LayoutInflater.from(requireContext().applicationContext).inflate(
+                R.layout.profile_image_bottom_sheet, null)
+            // bottomSheetDialog 뷰 생성
+            bottomSheetDialog.setContentView(bottomSheetView)
+            // bottomSheetDialog 호출
+            bottomSheetDialog.show()
+
+            bottomSheetView.findViewById<View>(R.id.new_profile_image_bt).setOnClickListener {
+                bottomSheetDialog.dismiss()
+                val action = ProfileFragmentDirections.actionProfileFragmentToProFileImageEditFragment(nickname = myNickName, name = myName, link = mylink, description = myDescription)
+                Navigation.findNavController(requireView()).navigate(action)
+            }
+        }
     }
 
 
@@ -143,6 +164,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
         if(response.isSuccess){
             with(response.resultProFileMyData){
+                mylink = link
+                myDescription = description
+                myName = name
+                myNickName = nickname
                 myProFileUrl = profileUrl
                 if (link != ""){
                     binding.profileGoMyLinkTv.visibility = View.VISIBLE

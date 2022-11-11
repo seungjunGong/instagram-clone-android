@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -25,6 +27,10 @@ import com.bumptech.glide.request.transition.Transition
 import com.softsquared.instagramlagame.R
 
 import com.softsquared.instagramlagame.databinding.ActivityMainBinding
+import com.softsquared.instagramlagame.src.main.home.HomeViewModel
+import com.softsquared.instagramlagame.src.main.profile.models.ResultProFileMyData
+import com.softsquared.instagramlagame.src.signup.SignUpService
+import com.softsquared.instagramlagame.src.signup.sginup_models.SignUpViewModel
 
 import jp.wasabeef.glide.transformations.CropCircleWithBorderTransformation
 import jp.wasabeef.glide.transformations.internal.Utils
@@ -34,6 +40,10 @@ class MainActivity : AppCompatActivity() {
 
     // 바텀네비게이션 바 처리를 위함
     lateinit var binding : ActivityMainBinding
+    lateinit var checkHomeProfile : HomeViewModel
+
+    var check = true
+    private var userImage = "https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/ic_profile.png?alt=media&token=0053a8f4-3cdf-44b7-8dbe-768ac4d4bba4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +65,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        checkHomeProfile = ViewModelProvider(this)[HomeViewModel::class.java]
+        //observe를 통해 liveData가 바뀔때마다 체크하는 함수
+        checkHomeProfile.checkProfile.observe(this, Observer{
+            // 등록 요청
+            if(check){
+                userImage = it.profileUrl
+            }
+            check = false
+        })
+
         // 바텀네비게이션
         val navHostFragment = supportFragmentManager.findFragmentById(com.softsquared.instagramlagame.R.id.main_container) as NavHostFragment
         val navController = navHostFragment.navController
@@ -64,9 +84,9 @@ class MainActivity : AppCompatActivity() {
         // 프로필 버튼 전환 처리
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             if(destination.id == R.id.profileFragment) {
-                Glide.with(applicationContext).asBitmap().load("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/bttnav_sample.PNG?alt=media&token=3d83e122-ec02-42b3-83d3-f07df915d872")
+                Glide.with(applicationContext).asBitmap().load("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/ic_profile.png?alt=media&token=0053a8f4-3cdf-44b7-8dbe-768ac4d4bba4")
                     .apply(bitmapTransform(
-                    CropCircleWithBorderTransformation(Utils.toDp(20), Color.BLACK))).into(object : CustomTarget<Bitmap?>() {
+                    CropCircleWithBorderTransformation(Utils.toDp(15), Color.BLACK))).into(object : CustomTarget<Bitmap?>() {
                     override fun onResourceReady(
                         resource: Bitmap,
                         @Nullable transition: Transition<in Bitmap?>?,
@@ -79,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                     override fun onLoadCleared(@Nullable placeholder: Drawable?) {}
                 })
             } else {
-                Glide.with(applicationContext).asBitmap().load("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/bttnav_sample.PNG?alt=media&token=3d83e122-ec02-42b3-83d3-f07df915d872")
+                Glide.with(applicationContext).asBitmap().load("https://firebasestorage.googleapis.com/v0/b/instagramlagame.appspot.com/o/ic_profile.png?alt=media&token=0053a8f4-3cdf-44b7-8dbe-768ac4d4bba4")
                     .circleCrop().into(object : CustomTarget<Bitmap?>() {
                         override fun onResourceReady(
                             resource: Bitmap,

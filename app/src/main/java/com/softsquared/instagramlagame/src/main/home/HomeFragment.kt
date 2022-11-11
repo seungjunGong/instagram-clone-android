@@ -1,20 +1,17 @@
 package com.softsquared.instagramlagame.src.main.home
 
 
-import android.content.SharedPreferences
-import android.graphics.Color
+import android.media.Image
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.View
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.softsquared.instagramlagame.R
-import com.softsquared.instagramlagame.config.ApplicationClass
-import com.softsquared.instagramlagame.config.ApplicationClass.Companion.X_ACCESS_TOKEN
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentHomeBinding
-import com.softsquared.instagramlagame.src.main.MainActivity
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.FeedRVD
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedLikeResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedResult
@@ -22,12 +19,13 @@ import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.mod
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.HomeStoryResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.ResultHomeStory
 import com.softsquared.instagramlagame.src.main.profile.ProFileFragmentInterface
+import com.softsquared.instagramlagame.src.main.profile.ProFileService
 import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
 
 
 class HomeFragment :
     BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
-    HomeFragmentInterface {
+    HomeFragmentInterface, ProFileFragmentInterface {
 
     private var feedData = ArrayList<FeedResult>()
     private var storyData = ArrayList<ResultHomeStory>()
@@ -36,6 +34,10 @@ class HomeFragment :
     private var feedLoading = false
     private var storyLoading = false
     private var homeRVD = FeedRVD(feedData,storyData)
+    private var userNick : String = ""
+    private var userUrl : String = ""
+    private var userID : Int = 0
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class HomeFragment :
         binding.mainLoading.loadingMainProgressBar.visibility = View.VISIBLE
         HomeService(this).tryGetHomeStory()
         HomeService(this).tryGetFeed(pageNumber)
+        ProFileService(this).tryGetProFileMyData()
         binding.homeRcv.layoutManager = LinearLayoutManager(requireContext())
 
 
@@ -77,6 +80,8 @@ class HomeFragment :
         }
 
     }
+
+
 
     fun moreItems() {
         pageNumber++
@@ -118,6 +123,10 @@ class HomeFragment :
             homeRVD = FeedRVD(feedData, storyData)
             binding.homeRcv.adapter = homeRVD
 
+            homeRVD.stateRestorationPolicy =
+                RecyclerView.Adapter.StateRestorationPolicy.ALLOW
+
+
             // feed like 처리
             homeRVD.setFeedLikeClickListener(object : FeedRVD.FeedClickListener {
                 override fun onLikeClick(postId: Int, liked: Boolean) {
@@ -147,7 +156,8 @@ class HomeFragment :
             homeRVD.setCommentClickListener(object : FeedRVD.FeedCommentClickListener{
                 override fun onCommentClick(postId: Int) {
                     // 데이터 전달
-                    val action = HomeFragmentDirections.actionHomeFragmentToCommentFragment(postId)
+                    Log.d("HomeTest","$postId, $userNick, $userUrl")
+                    val action = HomeFragmentDirections.actionHomeFragmentToCommentFragment(postId = postId, getNick =  userNick, getUserImage= userUrl)
                     Navigation.findNavController(requireView()).navigate(action)
                     hideBttnav()
                 }
@@ -186,16 +196,11 @@ class HomeFragment :
         with(response.resultHomeStory) {
             storyData.apply {
                 for (result in this@with) {
-                    if (result.visitCnt < result.storyDataList.size) {
                         add(result)
-                    }
                 }
-                for (result in this@with) {
-                    if (result.visitCnt >= result.storyDataList.size) {
-                        add(result)
-                    }
-                }
+
             }
+            storyData = response.resultHomeStory as ArrayList<ResultHomeStory> /* = java.util.ArrayList<com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.ResultHomeStory> */
 
             storyLoading = true
             checkLoading()
@@ -206,6 +211,18 @@ class HomeFragment :
     }
 
     override fun onGetHomeStoryFailure(message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onGetProFileMyDataSuccess(response: ProFileMyDataResponse) {
+        Log.d("HomeTest","$response")
+        userNick = response.resultProFileMyData.nickname
+        userID = response.resultProFileMyData.userId
+        userUrl = response.resultProFileMyData.profileUrl
+
+    }
+
+    override fun onGetProFileMyDataFailure(message: String) {
         TODO("Not yet implemented")
     }
 

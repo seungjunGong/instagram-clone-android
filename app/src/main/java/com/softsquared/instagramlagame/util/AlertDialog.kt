@@ -10,10 +10,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.view.Window
-import androidx.core.content.ContextCompat.startActivity
 import com.softsquared.instagramlagame.config.ApplicationClass
 import com.softsquared.instagramlagame.databinding.DialogAlertBinding
 import com.softsquared.instagramlagame.src.login.LoginActivity
@@ -56,7 +54,8 @@ class AlertDialog(context: Context, private val activity: Activity, private val 
 
 
                 val intent = Intent(context, LoginActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP //액티비티 스택제거
                 activity.startActivity(intent)
             }
             binding.alertBottomBt.setOnClickListener {

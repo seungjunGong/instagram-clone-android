@@ -62,6 +62,7 @@ class ShoppingFragment : BaseFragment<FragmentShoppingBinding>(FragmentShoppingB
 
     override fun onGetShoppingListSuccess(response: ShoppingListResponse) {
         if (response.result.isNotEmpty()) {
+            Log.d("SShopping", "$response")
             if (isLoading) {
                 binding.shoppingLoadingBar.loadingProgressBar.visibility = View.GONE
                 shoppingData.apply {
@@ -90,6 +91,7 @@ class ShoppingFragment : BaseFragment<FragmentShoppingBinding>(FragmentShoppingB
                 binding.shoppingRcv.adapter = shoppingRVD
             }
         } else {
+            Log.d("SShopping", "$page")
             page = 0
             ShoppingService(this).tryGetShoppingList(page)
         }

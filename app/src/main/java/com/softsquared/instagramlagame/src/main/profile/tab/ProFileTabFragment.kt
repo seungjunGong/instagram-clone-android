@@ -1,5 +1,6 @@
 package com.softsquared.instagramlagame.src.main.profile.tab
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log.d
 import android.view.View
@@ -42,7 +43,7 @@ class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabIte
     override fun onGetProFileCompleteSuccess(response: ProFileCompleteResponse) {
 
         var viewData = ArrayList<ProFileCompleteViewData>()
-
+        var count = 0
         with(response.resultProFileComplete){
             if (!(name && profileImg && description && follow)){
                 viewData.apply {
@@ -59,22 +60,29 @@ class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabIte
                         add(ProFileCompleteViewData("사람 찾기", R.drawable.ic_profile_follow_add, "팔로우할 사람 찾기", "관심 있는 사람 및 관심사를\n팔로우하세요."))
                     }
                     if(name){
+                        count++
                         add(ProFileCompleteViewData("이름 수정", R.drawable.ic_profile_name_add_correct,"이름추가","친구들이 회원님을 알아볼 수 있도록\n이름과 성을 모두 추가하세요."))
                     }
                     if(profileImg){
+                        count++
                         add(ProFileCompleteViewData("사진 변경", R.drawable.ic_profile_image_add_correct, "프로필 사진 추가", "Instagram에서 회원님을 나타낼\n프로필 사진을 선택하세요."))
                     }
                     if(description){
+                        count++
                         add(ProFileCompleteViewData("소개 수정", R.drawable.ic_profile_introduce_add_correct, "소개 추가","팔로워에게 회원님에 대해 간단히\n소개해주세요."))
                     }
                     if(follow){
+                        count++
                         add(ProFileCompleteViewData("더 찾아보기", R.drawable.ic_profile_follow_add_correct, "팔로우할 사람 찾기", "관심 있는 사람 및 관심사를\n팔로우하세요."))
                     }
                 }
                 // 프로필 완성 레이아웃
                 val recyclerViewAdapter = ProFileCompleteRVD(viewData, requireContext())
                 binding.profileCompleteRv.adapter = recyclerViewAdapter
-
+                binding.profileVpCompleteProfileCountTag.text = "$count/4개"
+                if(count < 2){
+                    binding.profileVpCompleteProfileCountTag.setTextColor(Color.parseColor("#ff7f00"))
+                }
 
             } else{
                 binding.profileVpCompleteProfile.visibility = View.GONE
@@ -90,6 +98,8 @@ class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabIte
         if (response.resultUserThum.thumbnailList.isEmpty()) {
             binding.profileTabZeroPostItem.visibility = View.VISIBLE
         } else{
+            binding.profileTabRcv.visibility = View.VISIBLE
+
             val spanCount = 3 // 3 columns
 
             val spacing = 10 // 50px
@@ -97,12 +107,10 @@ class ProFileTabFragment(val type : String) : BaseFragment<FragmentProfileTabIte
             val includeEdge = false
             binding.profileTabRcv.addItemDecoration(GridSpacingItemDecoration(spanCount, spacing, includeEdge))
             val layoutManager = GridLayoutManager(requireContext(), 3)
-
             binding.profileTabRcv.setHasFixedSize(true)
             binding.profileTabRcv.layoutManager = layoutManager
             val proFileTabRVD = ProFileTabRVAdapter(response.resultUserThum.thumbnailList)
             binding.profileTabRcv.adapter = proFileTabRVD
-            binding.profileTabRcv.visibility = View.VISIBLE
 
             proFileTabRVD.setFeedItemClickListener(object : ProFileTabRVAdapter.FeedItemClickListener{
                 override fun onItemClick(postId: Int) {

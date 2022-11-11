@@ -2,9 +2,12 @@ package com.softsquared.instagramlagame.src.main.home
 
 import com.softsquared.instagramlagame.src.main.home.comment.models.CommentDetailResponse
 import com.softsquared.instagramlagame.src.main.home.comment.models.CommentPageResponse
+import com.softsquared.instagramlagame.src.main.home.comment.models.CommentPostResponse
+import com.softsquared.instagramlagame.src.main.home.comment.models.RequestPostComment
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.HomeFeedResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedLikeResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.HomeStoryResponse
+import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -30,4 +33,8 @@ interface HomeRetrofitInterface {
 
     @GET("/posts/user/list")
     fun getPostList(@Query("postId") postId: Int, @Query("page") page: Int): Call<HomeFeedResponse>
+
+    @POST("/posts/comments")
+    fun postComments(@Body parms: RequestPostComment) : Call<CommentPostResponse>
+
 }

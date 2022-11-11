@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="사람들이 회원님을 사진 및 동여상에\n태그하면 태그된 사진 및 동여상이 여기에\n표시됩니다."
+                android:text="사람들이 회원님을 사진 및 동여상에\n태그하면 태그된 사진 및 동영상이 여기에\n표시됩니다."
                 android:textSize="@dimen/profile_text_size"
                 android:textColor="@color/basic_gray"
                 android:layout_marginBottom="60dp"

@@ -4,6 +4,8 @@ import com.softsquared.instagramlagame.config.ApplicationClass
 import com.softsquared.instagramlagame.src.main.home.HomeRetrofitInterface
 import com.softsquared.instagramlagame.src.main.home.comment.models.CommentDetailResponse
 import com.softsquared.instagramlagame.src.main.home.comment.models.CommentPageResponse
+import com.softsquared.instagramlagame.src.main.home.comment.models.CommentPostResponse
+import com.softsquared.instagramlagame.src.main.home.comment.models.RequestPostComment
 import retrofit2.Call
 import retrofit2.Response
 
@@ -38,6 +40,23 @@ class CommentService (val commentFragmentInterface: CommentFragmentInterface) {
 
             override fun onFailure(call: Call<CommentPageResponse>, t: Throwable) {
                 commentFragmentInterface.onGetCommentPageFailure(t.message ?: "통신 오류")
+            }
+
+        })
+    }
+
+    fun tryPostComments(postComments : RequestPostComment){
+        val homeRetrofitInterface = ApplicationClass.sRetrofit.create(HomeRetrofitInterface::class.java)
+        homeRetrofitInterface.postComments(postComments).enqueue(object : retrofit2.Callback<CommentPostResponse>{
+            override fun onResponse(
+                call: Call<CommentPostResponse>,
+                response: Response<CommentPostResponse>,
+            ) {
+                commentFragmentInterface.onPostCommentsSuccess(response.body() as CommentPostResponse)
+            }
+
+            override fun onFailure(call: Call<CommentPostResponse>, t: Throwable) {
+                commentFragmentInterface.onPostCommentFailure(t.message ?: "통신 오류")
             }
 
         })

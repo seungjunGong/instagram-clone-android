@@ -103,6 +103,7 @@ class FeedRVD(
                 holder.binding.storyRcv.adapter = storyRVD
                 Log.d("storyData", "실행 $storyData")
 
+
             }
             // ITEM
             is ItemViewHolder -> {
@@ -129,6 +130,7 @@ class FeedRVD(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind() {
+
         }
     }
 

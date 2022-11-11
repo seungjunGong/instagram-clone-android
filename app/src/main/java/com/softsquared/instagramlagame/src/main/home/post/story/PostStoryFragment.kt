@@ -1,29 +1,26 @@
-package com.softsquared.instagramlagame.src.main.home.post
+package com.softsquared.instagramlagame.src.main.home.post.story
 
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.Animation
-import android.widget.FrameLayout
-import android.widget.ImageView
+import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
 import com.softsquared.instagramlagame.R
 import com.softsquared.instagramlagame.config.BaseFragment
 import com.softsquared.instagramlagame.databinding.FragmentPostStoryBinding
-import com.softsquared.instagramlagame.src.main.MainActivity
 import com.softsquared.instagramlagame.util.PermissionUtil
 import java.io.File
 import java.text.SimpleDateFormat
@@ -31,7 +28,8 @@ import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostStoryBinding::bind, R.layout.fragment_post_story){
+class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostStoryBinding::bind,
+    R.layout.fragment_post_story) {
 
 
     private var imageCapture: ImageCapture? = null
@@ -48,9 +46,10 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
         super.onViewCreated(view, savedInstanceState)
 
         Log.d("PostStoryFragment", "onViewCreated")
-        setListener()
+
         setCameraAnimationListener()
         permissionCheck()
+
         outputDirectory = getOutputDirectory()
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -67,26 +66,36 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
             Navigation.findNavController(requireView()).navigate(action)
             applyBlackColors()
         }
+        binding.postStoryPhotoBt.setOnClickListener {
+            savePhoto()
+        }
 
 
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
+        var isNavigating = false
         // 백버튼 설정
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 view?.let {
-                    val action = PostStoryFragmentDirections.actionPostStoryFragmentToHomeFragment()
-                    Navigation.findNavController(requireView()).navigate(action)
-                    applyWhiteColors()
+                    if (showCaptureImage()) {
+                        hideCaptureImage()
+                    } else {
+                        if (!isNavigating) {
+                            isNavigating = true
+                            val action =
+                                PostStoryFragmentDirections.actionPostStoryFragmentToHomeFragment()
+                            Navigation.findNavController(requireView()).navigate(action)
+                            applyWhiteColors()
+                        }
+                    }
                 }
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -148,7 +157,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
@@ -161,11 +170,6 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
         }
     }
 
-    private fun setListener() {
-        binding.postStoryPhotoBt.setOnClickListener {
-            savePhoto()
-        }
-    }
 
     private fun getOutputDirectory(): File {
         val mediaDir = requireActivity().externalMediaDirs.firstOrNull()?.let {
@@ -187,7 +191,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
                 .also {
                     it.setSurfaceProvider(binding.postCameraPreview.surfaceProvider)
                 }
-            this.binding.postCameraPreview.implementationMode = PreviewView.ImplementationMode.COMPATIBLE
+
 
             imageCapture = ImageCapture.Builder().build()
 
@@ -220,10 +224,20 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     savedUri = Uri.fromFile(photoFile)
+                    Log.d("PostStoryFragment", "$savedUri")
+                    val animation =
+                        AnimationUtils.loadAnimation(requireContext(), R.anim.camera_shutter)
+                    animation.setAnimationListener(cameraAnimationListener)
+                    binding.frameLayoutShutter.animation = animation
+                    binding.frameLayoutShutter.visibility = View.VISIBLE
+                    binding.frameLayoutShutter.startAnimation(animation)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
                     exception.printStackTrace()
+                    val action = PostStoryFragmentDirections.actionPostStoryFragmentToHomeFragment()
+                    Navigation.findNavController(requireView()).navigate(action)
+                    applyWhiteColors()
                     showCustomToast("오류!")
                 }
 
@@ -237,6 +251,7 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
             }
 
             override fun onAnimationEnd(animation: Animation?) {
+                binding.frameLayoutShutter.visibility = View.GONE
                 showCaptureImage()
             }
 
@@ -250,13 +265,14 @@ class PostStoryFragment : BaseFragment<FragmentPostStoryBinding>(FragmentPostSto
     private fun showCaptureImage(): Boolean {
         if (binding.frameLayoutPreview.visibility == View.GONE) {
             binding.frameLayoutPreview.visibility = View.VISIBLE
-            binding.imageViewPreview.setImageURI(savedUri)
+            val action =
+                PostStoryFragmentDirections.actionPostStoryFragmentToUploadStoryFragment(savedUri.toString())
+            Navigation.findNavController(requireView()).navigate(action)
             return false
         }
-
         return true
-
     }
+
     private fun hideCaptureImage() {
         binding.imageViewPreview.setImageURI(null)
         binding.frameLayoutPreview.visibility = View.GONE

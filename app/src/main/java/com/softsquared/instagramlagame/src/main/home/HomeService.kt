@@ -1,9 +1,12 @@
 package com.softsquared.instagramlagame.src.main.home
 
+import com.softsquared.instagramlagame.config.ApplicationClass
 import com.softsquared.instagramlagame.config.ApplicationClass.Companion.sRetrofit
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.FeedLikeResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.feed.models.HomeFeedResponse
 import com.softsquared.instagramlagame.src.main.home.whole_recyclerview.story.models.HomeStoryResponse
+import com.softsquared.instagramlagame.src.main.profile.ProFileRetrofitInterface
+import com.softsquared.instagramlagame.src.main.profile.models.ProFileMyDataResponse
 import retrofit2.Call
 import retrofit2.Response
 
@@ -73,4 +76,6 @@ class HomeService (val homeFragmentInterface: HomeFragmentInterface) {
             }
         })
     }
+
+
 }
